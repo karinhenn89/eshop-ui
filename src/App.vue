@@ -1,7 +1,7 @@
 <template>
-
   <div id="app">
-    <router-view></router-view>
+    <!-- The HomePage is rendered here, which includes MainNavbar -->
+    <router-view />
   </div>
 </template>
 
@@ -9,12 +9,11 @@
 
 
 export default {
-
   name: 'App',
   components: {
 
   }
-}
+};
 </script>
 
 <style>

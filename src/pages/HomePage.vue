@@ -18,6 +18,9 @@ export default {
     MainNavbar,
     HomePageComp
   },
+  mounted() {
+    this.loggedIn = localStorage.getItem('loggedIn') === 'true';
+  },
 
 }
 </script>

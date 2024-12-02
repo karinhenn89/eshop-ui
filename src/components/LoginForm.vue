@@ -6,7 +6,6 @@
         @submit.prevent="login"
         class="d-flex align-items-center gap-2"
     >
-      <!-- Username Input -->
       <input
           v-model="username"
           id="username"
@@ -15,8 +14,6 @@
           class="form-control form-control-sm"
           style="width: 100px;"
       />
-
-      <!-- Password Input -->
       <input
           v-model="password"
           id="password"
@@ -25,8 +22,6 @@
           class="form-control form-control-sm"
           style="width: 100px;"
       />
-
-      <!-- Log In Button -->
       <button
           class="btn btn-outline-secondary btn-sm text-nowrap"
           type="submit"
@@ -57,10 +52,10 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      username: '', // Bound to the input
-      password: '', // Bound to the input
-      loggedIn: false, // Tracks login state
-      loginError: false, // Tracks if login failed
+      username: '',
+      password: '',
+      loggedIn: false,
+      loginError: false,
     };
   },
   methods: {
@@ -72,34 +67,30 @@ export default {
         };
 
         // Send login request to backend
-        const response = await axios.post(
-            'http://localhost:8090/api/eshop/validateUser',
-            user
-        );
+        const response = await axios.post('http://localhost:8090/api/eshop/validateUser', user);
 
         // Handle response
         if (response.data === true) {
-          localStorage.setItem('loggedIn', true);
-          this.loggedIn = true; // Update state to logged in
-          this.loginError = false; // Reset error state
-          alert('Logged in successfully!');
+          this.loggedIn = true;
+          localStorage.setItem('loggedIn', true); // Persist login state
+          localStorage.setItem('username', this.username); // Persist username
+          this.$emit('login-success', this.username); // Emit the username to parent component
         } else {
-          this.loginError = true; // Show error if invalid login
+          this.loginError = true; // Show error if login fails
         }
       } catch (error) {
-        localStorage.removeItem('loggedIn');
         console.error('Login error:', error);
-        this.loginError = true; // Show error if request fails
+        this.loginError = true;
       }
     },
     logout() {
-      this.loggedIn = false; // Reset logged-in state
-      this.username = ''; // Clear username
-      this.password = ''; // Clear password
-      alert('Logged out successfully!');
+      this.loggedIn = false;
+      this.username = '';
+      this.password = '';
+      this.$emit('login-success', null); // Notify the parent component to reset the state
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('username');
     },
-
-
   },
 };
 </script>

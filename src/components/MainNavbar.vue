@@ -1,6 +1,6 @@
 <template>
-  <div class="container ">
-    <div class="">
+  <div class="container">
+    <div>
       <img class="img-fluid" src="../assets/20221222-_DSC81782-Edit.jpg" alt="Responsive Image">
       <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
         <a class="navbar-brand" href="#"></a>
@@ -21,34 +21,65 @@
             </li>
           </ul>
         </div>
-<LoginForm/>
+
+        <!-- Conditionally display login form or user info -->
+        <div v-if="!loggedIn">
+          <LoginForm @login-success="onLoginSuccess" />
+        </div>
+
+        <div v-else>
+          <span>{{ username }}</span> <!-- Display username -->
+          <button @click="logout" class="btn btn-outline-secondary btn-sm text-nowrap">Log out</button>
+        </div>
+
       </nav>
     </div>
-
-  </div >
-
+  </div>
 </template>
 
 <script>
-
 import LoginForm from "@/components/LoginForm.vue";
 
 export default {
   name: "MainNavbar",
-  components: {LoginForm},
+  components: { LoginForm },
+  data() {
+    return {
+      loggedIn: false, // Tracks login state
+      username: "", // Username of the logged-in user
+    };
+  },
+  methods: {
+    // This method will be triggered when the login is successful
+    onLoginSuccess(username) {
+      this.loggedIn = true;
+      this.username = username; // Store the username of the logged-in user
+      localStorage.setItem('loggedIn', true); // Persist the login state
+      localStorage.setItem('username', username); // Persist username
+    },
+    logout() {
+      this.loggedIn = false;
+      this.username = "";
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('username');
+      alert("Logged out successfully!");
+    }
+  },
+  mounted() {
+    // Check localStorage for stored login state and username
+    if (localStorage.getItem('loggedIn')) {
+      this.loggedIn = true;
+      this.username = localStorage.getItem('username');
+    }
+  }
 };
-
-
 </script>
-
-
 
 <style scoped>
 .flex-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
 }
 
 .flex-container img {

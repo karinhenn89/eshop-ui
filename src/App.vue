@@ -1,20 +1,19 @@
 <template>
-
   <div id="app">
-    <router-view></router-view>
+    <!-- The HomePage is rendered here, which includes MainNavbar -->
+    <HomePage />
   </div>
 </template>
 
 <script>
-
+import HomePage from "@/pages/HomePage.vue"; // Import the HomePage component
 
 export default {
-
   name: 'App',
   components: {
-
+    HomePage
   }
-}
+};
 </script>
 
 <style>

@@ -11,28 +11,17 @@
         <div class="collapse navbar-collapse display-5" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <router-link to="/" class="nav-link">Home</router-link>
+              <router-link to="/" class="nav-link fs-2">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/shop" class="nav-link">Shop</router-link>
+              <router-link to="/shop" class="nav-link fs-2">Shop</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/contact" class="nav-link">Contact</router-link>
+              <router-link to="/contact" class="nav-link fs-2">Contact</router-link>
             </li>
           </ul>
         </div>
-        <div class="d-flex">
-          <form class="d-flex">
-            <button class="btn btn-outline-secondary" type="submit">Log in</button>
-            <button class="btn btn-outline-secondary" type="submit">Register</button>
-            <button class="btn btn-outline-secondary" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-              </svg>
-              <span class="badge text-bg-secondary">4</span>
-            </button>
-          </form>
-        </div>
+<LoginForm/>
       </nav>
     </div>
 
@@ -41,8 +30,12 @@
 </template>
 
 <script>
+
+import LoginForm from "@/components/LoginForm.vue";
+
 export default {
   name: "MainNavbar",
+  components: {LoginForm},
 };
 </script>
 

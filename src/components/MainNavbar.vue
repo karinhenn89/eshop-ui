@@ -19,6 +19,10 @@
             <li class="nav-item">
               <router-link to="/contact" class="nav-link fs-2">Contact</router-link>
             </li>
+            <li v-if="loggedIn" class="nav-item">
+              <router-link to="/adminproducts" class="nav-link fs-2">Admin-Products</router-link>
+            </li>
+
           </ul>
         </div>
 
@@ -27,10 +31,15 @@
           <LoginForm @login-success="onLoginSuccess" />
         </div>
 
-        <div v-else>
-          <span>{{ username }}</span> <!-- Display username -->
+        <div v-else class="d-flex align-items-center gap-2">
+          <!-- Display username -->
+          <router-link to="/usermenu" class="text-decoration-none">
+            <span class="fs-6">{{ username }}</span>
+          </router-link>
+          <!-- Log out button -->
           <button @click="logout" class="btn btn-outline-secondary btn-sm text-nowrap">Log out</button>
         </div>
+
 
       </nav>
     </div>

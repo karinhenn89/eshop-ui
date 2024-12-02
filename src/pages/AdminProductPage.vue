@@ -1,13 +1,12 @@
 <script setup>
 
 import MainNavbar from "@/components/MainNavbar.vue";
-import UserInfo from "@/components/UserInfo.vue";
+import AdminProducts from "@/components/AdminProducts.vue";
 </script>
 
 <template>
-  <MainNavbar/>
-
-  <UserInfo />
+  <MainNavbar />
+<AdminProducts/>
 </template>
 
 <style scoped>

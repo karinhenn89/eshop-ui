@@ -1,30 +1,22 @@
 <template>
-  <MainNavbar />
-  <HomePageComp />
-
+<MainNavbar />
+  <ContactsCompo />
 </template>
 
 <script>
-
-
 import MainNavbar from "@/components/MainNavbar.vue";
-import HomePageComp from "@/components/HomePageComp.vue";
+import ContactsCompo from "@/components/ContactsCompo.vue";
 
 export default {
-  name: "HomePage",
-
+  name: "ContactPage",
   components: {
-
     MainNavbar,
-    HomePageComp
+    ContactsCompo
   },
 
 }
 </script>
 
-
-
 <style scoped>
-
 
 </style>

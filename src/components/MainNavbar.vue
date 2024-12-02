@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse display-5" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link " href="">Home <span class="visually-hidden">(current)</span></a>
+              <router-link to="/" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="">Shop</a>
+              <router-link to="/shop" class="nav-link">Shop</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="">Contact</a>
+              <router-link to="/contact" class="nav-link">Contact</router-link>
             </li>
           </ul>
         </div>

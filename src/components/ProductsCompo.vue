@@ -3,9 +3,9 @@
 </script>
 
 <template>
-
+  <div>Shop</div>
 </template>
 
-<style scoped>
+<style >
 
 </style>

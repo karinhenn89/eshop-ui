@@ -1,39 +1,48 @@
 <script>
 
 
-import {
-  fetchUserName
-} from "@/api/users"
+
 
 
 export default {
   data(){
     return {
       username:"",
-      name: "",
-      email: ""
+      firstName: "",
+      email: "",
+      lastName:""
     }
   },
 
   methods: {
-    async getUserInfo() {
-      try {
-        // Fetch user data (assumes fetchUserName is a promise-based API call)
-        const result = await fetchUserName(this.username);
-        if (result && result.name) {
-          this.name = result.name; // Update name in state
-        }
-      } catch (error) {
-        console.error("Error fetching user info:", error);
+    updateUserInfo() {
+      if (localStorage.getItem("loggedIn") === "true") {
+        // Populate data when user is logged in
+        this.username = localStorage.getItem("username");
+        this.email = localStorage.getItem("email");
+        this.firstName = localStorage.getItem("firstName");
+        this.lastName = localStorage.getItem("lastName");
+      } else {
+        // Clear data when user is logged out
+        this.username = "";
+        this.email = "";
+        this.firstName = "";
+        this.lastName = "";
       }
     },
+
   },
 
   mounted() {
+
+
     // Check localStorage for stored login state and username
     if (localStorage.getItem("loggedIn")) {
-      this.username = localStorage.getItem("username"); // Retrieve stored username
-      this.getUserInfo(); // Fetch additional user info
+      this.username = localStorage.getItem("username");
+      this.email = localStorage.getItem("email");
+      this.firstName = localStorage.getItem("firstName");
+      this.lastName = localStorage.getItem("lastName");
+
     }
   },
 };
@@ -43,12 +52,14 @@ export default {
 </script>
 
 <template>
-<div>
-  <ul>
-    <li> Username : {{ username }}</li>
-    <li> Name : {{ name }}</li>
-  </ul>
-</div>
+  <div>
+    <ul>
+      <li> Username : {{ username }}</li>
+      <li> First Name : {{ firstName }}</li>
+      <li> Last Name : {{ lastName }}</li>
+      <li> Email: {{ email }}</li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>

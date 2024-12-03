@@ -37,7 +37,7 @@
             <span class="fs-6">{{ username }}</span>
           </router-link>
           <!-- Log out button -->
-          <button @click="logout" class="btn btn-outline-secondary btn-sm text-nowrap">Log out</button>
+          <button @click="logout" id="logoutbutton" class="btn btn-outline-secondary btn-sm text-nowrap">Log out</button>
         </div>
 
 

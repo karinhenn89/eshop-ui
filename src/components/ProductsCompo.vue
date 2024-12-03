@@ -6,26 +6,47 @@
 
   <div>
     <table class="table">
-<!--      <thead>
-      <tr >
-        <th >Product</th>
-        <th class="text-center">Name</th>
-        <th class="text-center">Description</th>
-        <th class="text-center">Price</th>
-        <th class="text-center">Action</th>
+      <thead>
+      <tr>
+        <th>Foto pakett</th>
+        <th class="text-center">Kirjeldus</th>
+        <th class="text-center">Hind</th>
+        <th class="text-center"></th>
       </tr>
-      </thead>-->
+      </thead>
+
       <tbody>
-      <tr v-for="item in storeProducts" :key="item">
+      <tr v-for="item in storeProducts" :key="item.productName">
         <td>{{ item.productName }}</td>
         <td class="text-center">{{ item.description }}</td>
         <td class="text-center">${{ item.price }}</td>
         <td class="text-center">
-          <button @click="removeProduct(item.name)" class="btn btn-danger btn-sm">Remove</button>
+          <button @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
+          <!--          <button @click="updateProduct(item.productName)" class="btn btn-sm">Muuda toodet </button>-->
         </td>
       </tr>
       </tbody>
     </table>
+
+    <div class="input-group">
+      <form @submit.prevent="addProduct">
+        <div class="row text-center">
+          <input v-model="newProduct.productName" placeholder="Toote nimi" class=" form-control col" required/>
+          <input v-model="newProduct.price" placeholder="Hind" class=" form-control col" required/>
+          <div class="input-group">
+            <span class="input-group-text">Toote kirjeldus</span>
+            <textarea v-model="newProduct.description" class="form-control" aria-label="With textarea"></textarea>
+
+          </div>
+          <button @click="addProduct()" class="btn btn-secondary btn-sm">Add new</button>
+        </div>
+      </form>
+    </div>
+
+
+    <br><br><br>
+
+
   </div>
 </template>
 
@@ -39,19 +60,22 @@ export default {
     newProduct: {productName: "", description: "", price: ""},
     storeProducts: []
   }),
-methods:{
-  fetchProducts() {
-    axios.all([
+  methods: {
+    fetchProducts() {
+      axios.all([
         axios.get(`${this.api}/show-all-products`).then(res => (this.storeProducts = res.data))
-    ])
+      ])
     },
     removeProduct(productName) {
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchProducts);
     },
-  /*  addProduct() {
-      axios.post(`${this.api}/add-product`,this.newProduct´).then(this.fetchProducts);
-      this.newProduct ={productName: "", description: "", price: ""};
-    }*/
+    addProduct() {
+      axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchProducts);
+      this.newProduct = {productName: "", description: "", price: ""};
+    },
+    updateProduct(productName) {
+      axios.put(`${this.api}/update-product-details/${productName}`).then(this.fetchProducts)
+    }
   },
   mounted() {
     this.fetchProducts()

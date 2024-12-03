@@ -19,8 +19,11 @@
             <li class="nav-item">
               <router-link to="/contact" class="nav-link fs-2">Contact</router-link>
             </li>
-            <li v-if="loggedIn" class="nav-item">
-              <router-link to="/adminproducts" class="nav-link fs-2">Admin-Products</router-link>
+            <li v-if="loggedIn && this.userRightsId === '1'" class="nav-item">
+              <router-link to="/allusers" class="nav-link fs-2">All users</router-link>
+            </li>
+            <li v-if="loggedIn && this.userRightsId === '1'" class="nav-item">
+              <router-link to="/allorders" class="nav-link fs-2">All orders</router-link>
             </li>
 
           </ul>
@@ -49,6 +52,11 @@
 <script>
 import LoginForm from "@/components/LoginForm.vue";
 
+
+function getUserId() {
+
+}
+
 export default {
   name: "MainNavbar",
   components: { LoginForm },
@@ -56,29 +64,45 @@ export default {
     return {
       loggedIn: false, // Tracks login state
       username: "", // Username of the logged-in user
+      userRightsId: "",
     };
   },
   methods: {
+
     // This method will be triggered when the login is successful
     onLoginSuccess(username) {
       this.loggedIn = true;
       this.username = username; // Store the username of the logged-in user
       localStorage.setItem('loggedIn', true); // Persist the login state
       localStorage.setItem('username', username); // Persist username
+
+
+
     },
     logout() {
       this.loggedIn = false;
       this.username = "";
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
-      alert("Logged out successfully!");
-    }
+      localStorage.removeItem('userRightsId')
+      window.location.reload();
+    },
+
+
+
+
   },
   mounted() {
+
+
+    getUserId()
+
     // Check localStorage for stored login state and username
     if (localStorage.getItem('loggedIn')) {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');
+      this.userRightsId = localStorage.getItem("userRightsId")
+
     }
   }
 };

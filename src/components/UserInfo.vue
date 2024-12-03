@@ -15,20 +15,29 @@ export default {
   },
 
   methods: {
-    updateUserInfo() {
-      if (localStorage.getItem("loggedIn") === "true") {
-        // Populate data when user is logged in
-        this.username = localStorage.getItem("username");
-        this.email = localStorage.getItem("email");
-        this.firstName = localStorage.getItem("firstName");
-        this.lastName = localStorage.getItem("lastName");
-      } else {
-        // Clear data when user is logged out
-        this.username = "";
-        this.email = "";
-        this.firstName = "";
-        this.lastName = "";
-      }
+    // updateUserInfo() {
+    //   if (localStorage.getItem("loggedIn") === "true") {
+    //     // Populate data when user is logged in
+    //     this.username = localStorage.getItem("username");
+    //     this.email = localStorage.getItem("email");
+    //     this.firstName = localStorage.getItem("firstName");
+    //     this.lastName = localStorage.getItem("lastName");
+    //   } else {
+    //     // Clear data when user is logged out
+    //     this.username = "";
+    //     this.email = "";
+    //     this.firstName = "";
+    //     this.lastName = "";
+    //   }
+    // },
+
+    logout() {
+      this.loggedIn = false;
+      this.username = "";
+      localStorage.removeItem('username');
+      localStorage.removeItem('email');
+      localStorage.removeItem('userRightsId')
+      alert("Logged out successfully!");
     },
 
   },
@@ -42,8 +51,15 @@ export default {
       this.email = localStorage.getItem("email");
       this.firstName = localStorage.getItem("firstName");
       this.lastName = localStorage.getItem("lastName");
+    } else {
+      this.loggedIn = false;
+      this.username = "";
+      localStorage.removeItem('username');
+      localStorage.removeItem('email');
+      localStorage.removeItem('userRightsId')
 
     }
+
   },
 };
 

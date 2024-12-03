@@ -13,6 +13,7 @@
           placeholder="Username"
           class="form-control form-control-sm"
           style="width: 100px;"
+
       />
       <input
           v-model="password"
@@ -34,7 +35,7 @@
     <!-- Log Out Button -->
     <button
         v-if="loggedIn"
-        @click="logout"
+        @click="logout; window.location.reload()"
         class="btn btn-outline-secondary btn-sm text-nowrap"
     >
       Log out
@@ -80,6 +81,8 @@ export default {
           localStorage.setItem('email', response.data.email); // Persist username
           localStorage.setItem('userRightsId', response.data.userRightsId); // Persist username
           this.$emit('login-success', this.username); // Emit the username to parent component
+          window.location.reload();
+
         } else {
           this.loginError = true; // Show error if login fails
         }
@@ -89,12 +92,15 @@ export default {
       }
     },
     logout() {
+
       this.loggedIn = false;
       this.username = '';
       this.password = '';
       this.$emit('login-success', null); // Notify the parent component to reset the state
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
+
+
     },
   },
 };

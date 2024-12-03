@@ -35,7 +35,7 @@
     <!-- Log Out Button -->
     <button
         v-if="loggedIn"
-        @click="logout; window.location.reload()"
+        @click="logout"
         class="btn btn-outline-secondary btn-sm text-nowrap"
     >
       Log out
@@ -81,7 +81,9 @@ export default {
           localStorage.setItem('email', response.data.email); // Persist username
           localStorage.setItem('userRightsId', response.data.userRightsId); // Persist username
           this.$emit('login-success', this.username); // Emit the username to parent component
-          window.location.reload();
+
+          this.$router.push({ name: 'Home2' });
+
 
         } else {
           this.loginError = true; // Show error if login fails
@@ -99,6 +101,7 @@ export default {
       this.$emit('login-success', null); // Notify the parent component to reset the state
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
+
 
 
     },

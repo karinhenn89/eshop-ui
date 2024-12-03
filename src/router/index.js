@@ -11,6 +11,7 @@ import AdminSettledOrders from "@/pages/AdminSettledOrders.vue";
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
+    { path: '/home', name: 'Home2', component: HomePage },
     { path: '/shop', name: 'Shop', component: ShopPage },
     { path: '/contact', name: 'Contact', component: ContactPage },
     { path: '/adminproducts', name: 'Admin-Products', component: AdminProductPage },

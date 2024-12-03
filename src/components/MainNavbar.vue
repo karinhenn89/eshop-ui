@@ -85,7 +85,10 @@ export default {
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
       localStorage.removeItem('userRightsId')
-      window.location.reload();
+
+      this.$router.push({ name: 'Home2' });
+
+
     },
 
 

@@ -67,13 +67,17 @@ export default {
         };
 
         // Send login request to backend
-        const response = await axios.post('http://localhost:8090/api/eshop/validateUser', user);
+        const response = await axios.post('http://localhost:8090/login', user);
 
         // Handle response
-        if (response.data === true) {
+        if (response.status === 200) {
           this.loggedIn = true;
           localStorage.setItem('loggedIn', true); // Persist login state
           localStorage.setItem('username', this.username); // Persist username
+          localStorage.setItem('firstName', response.data.firstName); // Persist username
+          localStorage.setItem('lastName', response.data.lastName); // Persist username
+          localStorage.setItem('email', response.data.email); // Persist username
+          localStorage.setItem('userRightsId', response.data.userRightsId); // Persist username
           this.$emit('login-success', this.username); // Emit the username to parent component
         } else {
           this.loginError = true; // Show error if login fails

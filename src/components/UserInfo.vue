@@ -52,14 +52,14 @@ export default {
 </script>
 
 <template>
-<div>
-  <ul>
-    <li> Username : {{ username }}</li>
-    <li> First Name : {{ firstName }}</li>
-    <li> Last Name : {{ lastName }}</li>
-    <li> Email: {{ email }}</li>
-  </ul>
-</div>
+  <div>
+    <ul>
+      <li> Username : {{ username }}</li>
+      <li> First Name : {{ firstName }}</li>
+      <li> Last Name : {{ lastName }}</li>
+      <li> Email: {{ email }}</li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>

@@ -25,6 +25,7 @@
       <button
           class="btn btn-outline-secondary btn-sm text-nowrap"
           type="submit"
+          id="loginbutton"
       >
         Log in
       </button>

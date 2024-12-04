@@ -18,7 +18,7 @@
       <td class="text-center">{{ item.quantity }}</td>
       <td class="text-center">${{ item.price }}</td>
       <td class="text-center">
-
+        <button @click="removeProduct(item.productName)">Kustuta ostukorvist</button>
       </td>
     </tr>
     </tbody>
@@ -54,11 +54,10 @@ export default {
         axios.get(`${this.api}/cart-items-count`).then(res => (this.cartItemsCount = res.data))
       ])
     },
-
-    addProduct() {
-      axios.post(`${this.api}/add-to-cart`, this.newProduct).then(this.fetchCart);
-      this.newProduct = {productName: "", price: 0, quantity: 1};
+    removeProduct(productName){
+      axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
     }
+
 
   },
   mounted() {

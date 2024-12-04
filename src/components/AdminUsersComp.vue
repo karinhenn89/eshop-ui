@@ -29,10 +29,13 @@
 <script>
 import axios from "axios";
 
+
+
 export default {
   data: () => ({
     api: "http://localhost:8090/api/eshop",
     storeUsers: [], // Correct property name
+
   }),
 
   methods: {

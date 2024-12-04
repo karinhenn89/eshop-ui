@@ -28,18 +28,13 @@
           type="submit"
           id="loginbutton"
       >
-        Log in
+        Logi sisse
       </button>
     </form>
 
-    <!-- Log Out Button -->
-    <button
-        v-if="loggedIn"
-        @click="logout"
-        class="btn btn-outline-secondary btn-sm text-nowrap"
-    >
-      Log out
-    </button>
+
+
+
 
     <!-- Display Login Status -->
     <p v-if="loginError" class="text-danger">

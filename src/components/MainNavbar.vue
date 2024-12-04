@@ -53,9 +53,7 @@
 import LoginForm from "@/components/LoginForm.vue";
 
 
-function getUserId() {
 
-}
 
 export default {
   name: "MainNavbar",
@@ -98,7 +96,6 @@ export default {
   mounted() {
 
 
-    getUserId()
 
     // Check localStorage for stored login state and username
     if (localStorage.getItem('loggedIn')) {

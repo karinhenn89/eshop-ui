@@ -16,6 +16,7 @@ export default {
 
     MainNavbar,
 
+
   },
   mounted() {
     this.loggedIn = localStorage.getItem('loggedIn') === 'true';

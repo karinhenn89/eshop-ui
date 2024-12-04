@@ -28,7 +28,7 @@
       </tbody>
     </table>
 
-    <div class="input-group">
+    <div  class="input-group">
       <form @submit.prevent="addProduct">
         <div class="row text-center">
           <input v-model="newProduct.productName" placeholder="Toote nimi" class=" form-control col" required/>

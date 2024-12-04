@@ -19,6 +19,9 @@
             <li class="nav-item">
               <router-link to="/contact" class="nav-link fs-2">Contact</router-link>
             </li>
+            <li class ='nav-item'>
+              <router-link to="/shoppingcart" class="nav-link fs-2">Ostukorv</router-link>
+            </li>
             <li v-if="loggedIn" class="nav-item">
               <router-link to="/adminproducts" class="nav-link fs-2">Admin-Products</router-link>
             </li>

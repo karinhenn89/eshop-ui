@@ -22,7 +22,7 @@
         <td class="text-center">${{ item.price }}</td>
         <td class="text-center">
           <button @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
-          <!--          <button @click="updateProduct(item.productName)" class="btn btn-sm">Muuda toodet </button>-->
+          <button @click="addToCart(item)" class="btn btn-sm">Lisa ostukorvi</button>
         </td>
       </tr>
       </tbody>
@@ -57,6 +57,7 @@ import axios from "axios";
 export default {
   data: () => ({
     api: "http://localhost:8090/api/admin",
+    cartApi: "http://localhost:8090/api/cart",
     newProduct: {productName: "", description: "", price: ""},
     storeProducts: []
   }),
@@ -75,11 +76,31 @@ export default {
     },
     updateProduct(productName) {
       axios.put(`${this.api}/update-product-details/${productName}`).then(this.fetchProducts)
+    },
+
+    addToCart(item) {
+      const productToCart = {
+        productName: item.productName,
+        price: item.price,
+        quantity: 1 // Default to adding 1 quantity to the cart
+      };
+
+      axios
+          .post(`${this.cartApi}/add-to-cart`, productToCart)
+          .then(() => {
+            alert(`${item.productName} has been added to the cart!`);
+          })
+          .catch((err) => {
+            console.error("Error adding to cart:", err);
+          });
     }
   },
-  mounted() {
-    this.fetchProducts()
-  }
+
+
+mounted()
+{
+  this.fetchProducts()
+}
 }
 
 </script>

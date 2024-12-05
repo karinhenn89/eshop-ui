@@ -18,7 +18,7 @@
       <td class="text-center">{{ item.quantity }}</td>
       <td class="text-center">${{ item.price }}</td>
       <td class="text-center">
-        <button @click="removeProduct(item.productName)">Kustuta ostukorvist</button>
+        <button v-if="isAdmin"  @click="removeProduct(item.productName)">Kustuta ostukorvist</button>
       </td>
     </tr>
     </tbody>
@@ -38,15 +38,24 @@ import axios from "axios";
 
 export default {
   data: () => ({
+
     api: "http://localhost:8090/api/cart",
     newProduct: {productName: "", price: 0, quantity: 0},
     storeCart: [],
     quantity: 0,
     price: 0,
     cartTotal: 0,
-    cartItemsCount: 0
+    cartItemsCount: 0,
+    userRightsId: localStorage.getItem('userRightsId'),
+
+
   }),
+
+
+
   methods: {
+
+
     fetchCart() {
       axios.all([
         axios.get(`${this.api}/shoppingcart`).then(res => (this.storeCart = res.data)),
@@ -56,13 +65,25 @@ export default {
     },
     removeProduct(productName){
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
-    }
+    },
+
 
 
   },
   mounted() {
     this.fetchCart()
+
+    console.log(this.isAdmin)
   },
+  computed: {
+    isAdmin() {
+      return this.userRightsId === '1'; // Returns a boolean (true or false)
+    }
+  },
+
+
+
+
 }
 
 </script>

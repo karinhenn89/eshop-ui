@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- The HomePage is rendered here, which includes MainNavbar -->
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -10,10 +10,20 @@
 
 export default {
   name: 'App',
-  components: {
+  components: {},
 
+  mounted() {
+
+    if (localStorage.loggedIn === true) {
+      localStorage.getItem('username')
+      localStorage.getItem('userRightsId')
+
+    }
+    console.log(localStorage.getItem('userRightsId'))
   }
 };
+
+
 </script>
 
 <style>

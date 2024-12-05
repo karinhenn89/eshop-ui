@@ -1,13 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
-
 import ContactPage from "../pages/ContactPage.vue";
 import ShopPage from "../pages/ShopPage.vue";
-import AdminProductPage     from "@/pages/AdminProductPage.vue";
+import AdminProductPage from "@/pages/AdminProductPage.vue";
 import UserMenu from "@/pages/UserMenu.vue";
 import AdminUsers from "@/pages/AdminUsers.vue";
 import AdminSettledOrders from "@/pages/AdminSettledOrders.vue";
-
 import ShoppingCart from "@/pages/ShoppingCart.vue";
 import AddUserPage from "@/pages/AddUserPage.vue";
 

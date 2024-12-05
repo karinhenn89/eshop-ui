@@ -26,8 +26,31 @@
 
   </div>
 
+  <div v-if="isAdmin" >Tahaks seda näha vaid adminina</div>
+
 </template>
 
 <script>
+export default {
+  data(){
+    return {
+      username: localStorage.getItem('username') || null,
+      userRightsId: localStorage.getItem('userRightsId') || null,
+    };
+  },
+
+  computed: {
+    isAdmin() {
+      return this.userRightsId === '1';
+    },
+  },
+
+
+  mounted() {
+    console.log(this.isAdmin)
+    console.log(this.price)
+  }
+
+}
 
 </script>

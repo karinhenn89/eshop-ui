@@ -37,6 +37,11 @@
             <span class="input-group-text">Toote kirjeldus</span>
             <textarea v-model="newProduct.description" class="form-control" aria-label="With textarea"></textarea>
 
+            <div class="input-group">
+              <span class="input-group-text">Toote pilt</span>
+              <input type="file" @change="handleFileChange" class="form-control" />
+            </div>
+
           </div>
           <button @click="addProduct()" class="btn btn-secondary btn-sm">Add new</button>
         </div>
@@ -61,9 +66,18 @@ export default {
     newProduct: {productName: "", description: "", price: ""},
     username: localStorage.getItem('username') || null,
     userRightsId: localStorage.getItem('userRightsId') || null,
-    storeProducts: []
+    storeProducts: [],
+    image: null,
+
   }),
   methods: {
+
+    handleFileChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.image = file; // Store the file in the product object
+      }
+    },
     fetchProducts() {
       axios.all([
         axios.get(`${this.api}/show-all-products`).then(res => (this.storeProducts = res.data))
@@ -74,8 +88,10 @@ export default {
     },
     addProduct() {
       axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchProducts);
-      this.newProduct = {productName: "", description: "", price: ""};
+      this.newProduct = {productName: "", description: "", price: "", image:""};
+
     },
+
     updateProduct(productName) {
       axios.put(`${this.api}/update-product-details/${productName}`).then(this.fetchProducts)
     },

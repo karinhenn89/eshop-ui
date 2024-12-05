@@ -9,6 +9,7 @@ import AdminUsers from "@/pages/AdminUsers.vue";
 import AdminSettledOrders from "@/pages/AdminSettledOrders.vue";
 import ShoppingCart from "@/pages/ShoppingCart.vue";
 
+import ShoppingCart from "@/pages/ShoppingCart.vue";
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
@@ -17,6 +18,7 @@ const routes = [
     { path: '/contact', name: 'Contact', component: ContactPage },
     { path: '/adminproducts', name: 'Admin-Products', component: AdminProductPage },
     { path: '/usermenu', name: 'UserMenu', component: UserMenu },
+    { path: '/shoppingcart', name: 'Ostukorv', component: ShoppingCart},
     { path: '/allusers', name: 'AllUsers', component: AdminUsers },
     { path: '/allorders', name: 'AllOrders', component: AdminSettledOrders },
     { path: '/cart', name: 'Cart', component: ShoppingCart }

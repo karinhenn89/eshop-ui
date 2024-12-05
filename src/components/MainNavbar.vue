@@ -23,8 +23,14 @@
               <router-link to="/allusers" class="nav-link fs-2">All users</router-link>
             </li>
             <li v-if="loggedIn && this.userRightsId === '1'" class="nav-item">
-              <router-link class="nav-link fs-2" to="/allorders" >All orders</router-link>
+              <router-link to="/allorders" class="nav-link fs-2">All orders</router-link>
+            <li class ='nav-item'>
+              <router-link to="/shoppingcart" class="nav-link fs-2">Ostukorv</router-link>
             </li>
+            <li v-if="loggedIn" class="nav-item">
+              <router-link to="/adminproducts" class="nav-link fs-2">Admin-Products</router-link>
+            </li>
+
           </ul>
         </div>
 
@@ -67,7 +73,6 @@
   </div>
 </template>
 
-
 <script>
 import LoginForm from "@/components/LoginForm.vue";
 
@@ -94,10 +99,6 @@ export default {
       this.username = username; // Store the username of the logged-in user
       localStorage.setItem('loggedIn', true); // Persist the login state
       localStorage.setItem('username', username); // Persist username
-
-
-
-
     },
     logout() {
       this.loggedIn = false;
@@ -107,7 +108,6 @@ export default {
       localStorage.removeItem('userRightsId')
       // location.reload();
       this.$router.push({ name: 'Home2' });
-
 
 
     },
@@ -142,6 +142,4 @@ export default {
   max-width: 100%;
   height: auto;
 }
-
-
 </style>

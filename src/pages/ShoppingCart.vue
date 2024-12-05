@@ -1,9 +1,6 @@
 <template>
   <MainNavbar />
-<div>
-  <h1>Ostukorv</h1>
-
-</div>
+  <ShoppingCartTable />
 
 </template>
 
@@ -11,7 +8,7 @@
 <script>
 
 import MainNavbar from "@/components/MainNavbar.vue";
-
+import ShoppingCartTable from "@/components/ShoppingCartTable.vue";
 
 
 export default {
@@ -20,7 +17,7 @@ export default {
   components: {
 
     MainNavbar,
-
+    ShoppingCartTable
   },
 }
 </script>

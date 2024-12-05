@@ -4,14 +4,14 @@
     <form
         v-if="!loggedIn"
         @submit.prevent="login"
-        class="d-flex align-items-center gap-2"
+        class="d-flex align-items-center m-lg-2 "
     >
       <input
           v-model="username"
           id="username"
           type="text"
           placeholder="Username"
-          class="form-control form-control-sm"
+          class="form-control form-control-sm "
           style="width: 100px;"
       />
       <input
@@ -19,7 +19,7 @@
           id="password"
           type="password"
           placeholder="Password"
-          class="form-control form-control-sm"
+          class="form-control form-control-sm m-lg-2"
           style="width: 100px;"
       />
       <button

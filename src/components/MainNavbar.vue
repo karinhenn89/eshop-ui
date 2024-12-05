@@ -53,7 +53,7 @@
           <router-link
               v-if="!loggedIn"
               id="register"
-              to="/usermenu"
+              to="/addnewuser"
               class="btn btn-outline-secondary btn-sm text-nowrap d-inline-block gap-2">
             Registreeri
           </router-link>

@@ -74,6 +74,8 @@ import LoginForm from "@/components/LoginForm.vue";
 
 
 
+
+
 export default {
   name: "MainNavbar",
   components: { LoginForm },
@@ -95,6 +97,7 @@ export default {
 
 
 
+
     },
     logout() {
       this.loggedIn = false;
@@ -102,8 +105,9 @@ export default {
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('username');
       localStorage.removeItem('userRightsId')
-
+      // location.reload();
       this.$router.push({ name: 'Home2' });
+
 
 
     },

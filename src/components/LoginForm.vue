@@ -13,7 +13,6 @@
           placeholder="Username"
           class="form-control form-control-sm"
           style="width: 100px;"
-
       />
       <input
           v-model="password"
@@ -75,8 +74,9 @@ export default {
           localStorage.setItem('lastName', response.data.lastName); // Persist username
           localStorage.setItem('email', response.data.email); // Persist username
           localStorage.setItem('userRightsId', response.data.userRightsId); // Persist username
-          this.$emit('login-success', this.username); // Emit the username to parent component
+          this.$emit('login-success', this.username);// Emit the username to parent component
 
+          // location.reload();
           this.$router.push({ name: 'Home2' });
 
 
@@ -88,18 +88,7 @@ export default {
         this.loginError = true;
       }
     },
-    logout() {
 
-      this.loggedIn = false;
-      this.username = '';
-      this.password = '';
-      this.$emit('login-success', null); // Notify the parent component to reset the state
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('username');
-
-
-
-    },
   },
 };
 </script>

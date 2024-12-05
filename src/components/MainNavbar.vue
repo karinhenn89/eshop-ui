@@ -23,7 +23,7 @@
               <router-link to="/allusers" class="nav-link fs-2">All users</router-link>
             </li>
             <li v-if="loggedIn && this.userRightsId === '1'" class="nav-item">
-              <router-link class="btn btn-outline-secondary btn-sm text-nowrap" to="/allorders" >All orders</router-link>
+              <router-link class="nav-link fs-2" to="/allorders" >All orders</router-link>
             </li>
           </ul>
         </div>

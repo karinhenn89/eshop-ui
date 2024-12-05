@@ -18,7 +18,7 @@
       <td class="text-center">{{ item.quantity }}</td>
       <td class="text-center">${{ item.price }}</td>
       <td class="text-center">
-        <button v-if="isAdmin"  @click="removeProduct(item.productName)">Kustuta ostukorvist</button>
+        <button @click="removeProduct(item.productName)">Kustuta ostukorvist</button>
       </td>
     </tr>
     </tbody>
@@ -27,7 +27,13 @@
   <div>
     <h5 class="mt-4">Ostukorvi summa kokku: €{{cartTotal.toFixed(2) }}</h5>
     <h5 class="mt-4">Ostukorvis on  {{cartItemsCount }} toodet</h5>
+    <!-- Single button to add orders from cart and show alert -->
+    <button @click="addOrdersAndShowAlert" class="btn btn-outline-success">
+      Kinnita tellimus ja kuva tellimused
+    </button>
   </div>
+
+
 
 
 </template>
@@ -38,24 +44,18 @@ import axios from "axios";
 
 export default {
   data: () => ({
-
     api: "http://localhost:8090/api/cart",
+    ordersApi: "http://localhost:8090/api/settled-orders",
     newProduct: {productName: "", price: 0, quantity: 0},
     storeCart: [],
     quantity: 0,
     price: 0,
     cartTotal: 0,
     cartItemsCount: 0,
-    userRightsId: localStorage.getItem('userRightsId'),
-
-
+    orderNumber: 0,
+    orderDate: 0
   }),
-
-
-
   methods: {
-
-
     fetchCart() {
       axios.all([
         axios.get(`${this.api}/shoppingcart`).then(res => (this.storeCart = res.data)),
@@ -66,24 +66,41 @@ export default {
     removeProduct(productName){
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
     },
-
-
-
+    addOrdersAndShowAlert() {
+      // Add orders from cart to settled orders and fetch settled orders
+      axios
+          .post(`${this.ordersApi}/add-from-cart`) // Call backend method
+          .then(() => {
+            // Fetch settled orders after adding
+            axios
+                .get(`${this.ordersApi}/all-settled-orders`) // Ensure this endpoint returns settled orders
+                .then((response) => {
+                  const orders = response.data;
+                  let orderDetails = "Kinnitatud tellimus:\n\n";
+                  orders.forEach((order) => {
+                    orderDetails += `Tellimuse number: ${order.orderNumber}\n`;
+                    orderDetails += `Kuupäev: ${new Date(order.orderDate).toLocaleString()}\n`;
+                    orderDetails += `Toode: ${order.productName}\n`;
+                    orderDetails += `Kogus: ${order.quantity}\n`;
+                    orderDetails += `Hind: €${order.price.toFixed(2)}\n\n`;
+                  });
+                  alert(orderDetails); // Display the orders in an alert
+                  this.fetchCart(); // Refresh the cart
+                })
+                .catch((err) => {
+                  console.error("Error fetching settled orders:", err);
+                  alert("Kinnitatud tellimuste laadimine ebaõnnestus.");
+                });
+          })
+          .catch((err) => {
+            console.error("Error adding orders from cart:", err);
+            alert("Tellimuste kinnitamine ebaõnnestus.");
+          });
+    }
   },
   mounted() {
     this.fetchCart()
-
-    console.log(this.isAdmin)
   },
-  computed: {
-    isAdmin() {
-      return this.userRightsId === '1'; // Returns a boolean (true or false)
-    }
-  },
-
-
-
-
 }
 
 </script>

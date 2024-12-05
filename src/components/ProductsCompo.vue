@@ -21,14 +21,14 @@
         <td class="text-center">{{ item.description }}</td>
         <td class="text-center">${{ item.price }}</td>
         <td class="text-center">
-          <button @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
-          <button @click="addToCart(item)" class="btn btn-sm">Lisa ostukorvi</button>
+          <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
+          <button v-if="!isAdmin" @click="addToCart(item)" class="btn btn-sm">Lisa ostukorvi</button>
         </td>
       </tr>
       </tbody>
     </table>
 
-    <div  class="input-group">
+    <div v-if="isAdmin"  class="input-group">
       <form @submit.prevent="addProduct">
         <div class="row text-center">
           <input v-model="newProduct.productName" placeholder="Toote nimi" class=" form-control col" required/>
@@ -59,6 +59,8 @@ export default {
     api: "http://localhost:8090/api/admin",
     cartApi: "http://localhost:8090/api/cart",
     newProduct: {productName: "", description: "", price: ""},
+    username: localStorage.getItem('username') || null,
+    userRightsId: localStorage.getItem('userRightsId') || null,
     storeProducts: []
   }),
   methods: {
@@ -95,10 +97,16 @@ export default {
           });
     }
   },
+  computed: {
+    isAdmin() {
+      return this.userRightsId === '1';
+    },
+  },
 
 
 mounted()
 {
+  console.log(this.isAdmin)
   this.fetchProducts()
 }
 }

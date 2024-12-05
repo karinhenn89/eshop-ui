@@ -26,7 +26,7 @@
 
   </div>
 
-  <div v-if="isAdmin" >Tahaks seda näha vaid adminina</div>
+
 
 </template>
 
@@ -48,7 +48,7 @@ export default {
 
   mounted() {
     console.log(this.isAdmin)
-    console.log(this.price)
+
   }
 
 }

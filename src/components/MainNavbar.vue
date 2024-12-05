@@ -11,24 +11,24 @@
         <div class="collapse navbar-collapse display-5" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <router-link to="/" class="nav-link fs-2">Home</router-link>
+              <router-link to="/" class="nav-link fs-3">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/shop" class="nav-link fs-2">Shop</router-link>
+              <router-link to="/shop" class="nav-link fs-3">Shop</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/contact" class="nav-link fs-2">Contact</router-link>
+              <router-link to="/contact" class="nav-link fs-3">Contact</router-link>
             </li>
-            <li v-if="loggedIn && this.userRightsId === '1'" class="nav-item">
-              <router-link to="/allusers" class="nav-link fs-2">All users</router-link>
+            <li v-if="loggedIn && isAdmin" class="nav-item">
+              <router-link to="/allusers" class="nav-link fs-3">All users</router-link>
             </li>
-            <li v-if="loggedIn && this.userRightsId === '1'" class="nav-item">
-              <router-link to="/allorders" class="nav-link fs-2">All orders</router-link>  </li>
+            <li v-if="loggedIn && isAdmin" class="nav-item">
+              <router-link to="/allorders" class="nav-link fs-3">All orders</router-link>  </li>
 <!--            <li class ='nav-item'>-->
 <!--              <router-link to="/shoppingcart" class="nav-link fs-2">Ostukorv</router-link>-->
 <!--            </li>-->
             <li v-if="loggedIn" class="nav-item">
-              <router-link to="/adminproducts" class="nav-link fs-2">Admin-Products</router-link>
+              <router-link to="/adminproducts" class="nav-link fs-3">Admin-Products</router-link>
             </li>
 
           </ul>
@@ -115,6 +115,12 @@ export default {
 
 
 
+  },
+
+  computed: {
+    isAdmin() {
+      return this.userRightsId === '1';
+    },
   },
   mounted() {
 

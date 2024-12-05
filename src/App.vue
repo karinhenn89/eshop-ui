@@ -19,7 +19,7 @@ export default {
       localStorage.getItem('userRightsId')
 
     }
-    console.log(localStorage.getItem('userRightsId'))
+
   }
 };
 

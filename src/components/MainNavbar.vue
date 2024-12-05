@@ -23,10 +23,10 @@
               <router-link to="/allusers" class="nav-link fs-2">All users</router-link>
             </li>
             <li v-if="loggedIn && this.userRightsId === '1'" class="nav-item">
-              <router-link to="/allorders" class="nav-link fs-2">All orders</router-link>
-            <li class ='nav-item'>
-              <router-link to="/shoppingcart" class="nav-link fs-2">Ostukorv</router-link>
-            </li>
+              <router-link to="/allorders" class="nav-link fs-2">All orders</router-link>  </li>
+<!--            <li class ='nav-item'>-->
+<!--              <router-link to="/shoppingcart" class="nav-link fs-2">Ostukorv</router-link>-->
+<!--            </li>-->
             <li v-if="loggedIn" class="nav-item">
               <router-link to="/adminproducts" class="nav-link fs-2">Admin-Products</router-link>
             </li>
@@ -59,8 +59,8 @@
           </router-link>
           <router-link
 
-              id="cart"
-              to="/cart"
+              id="shoppingcart"
+              to="/shoppingcart"
               class="btn btn-outline-secondary btn-sm text-nowrap d-inline-block gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
               <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>

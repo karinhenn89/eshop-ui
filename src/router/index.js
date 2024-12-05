@@ -7,7 +7,6 @@ import AdminProductPage     from "@/pages/AdminProductPage.vue";
 import UserMenu from "@/pages/UserMenu.vue";
 import AdminUsers from "@/pages/AdminUsers.vue";
 import AdminSettledOrders from "@/pages/AdminSettledOrders.vue";
-import ShoppingCart from "@/pages/ShoppingCart.vue";
 
 import ShoppingCart from "@/pages/ShoppingCart.vue";
 
@@ -21,7 +20,7 @@ const routes = [
     { path: '/shoppingcart', name: 'Ostukorv', component: ShoppingCart},
     { path: '/allusers', name: 'AllUsers', component: AdminUsers },
     { path: '/allorders', name: 'AllOrders', component: AdminSettledOrders },
-    { path: '/cart', name: 'Cart', component: ShoppingCart }
+
 ];
 
 const router = createRouter({

@@ -27,9 +27,14 @@
   <div>
     <h5 class="mt-4">Ostukorvi summa kokku: €{{cartTotal.toFixed(2) }}</h5>
     <h5 class="mt-4">Ostukorvis on  {{cartItemsCount }} toodet</h5>
+    <!-- Single button to add orders from cart and show alert -->
+    <button @click="addOrdersAndShowAlert" class="btn btn-outline-success">
+      Kinnita tellimus ja kuva tellimus
+    </button>
   </div>
 
 
+  <br><br><br><br><br><br><br><br>
 </template>
 
 
@@ -39,12 +44,16 @@ import axios from "axios";
 export default {
   data: () => ({
     api: "http://localhost:8090/api/cart",
+    ordersApi: "http://localhost:8090/api/settled-orders",
     newProduct: {productName: "", price: 0, quantity: 0},
     storeCart: [],
     quantity: 0,
     price: 0,
     cartTotal: 0,
-    cartItemsCount: 0
+    cartItemsCount: 0,
+    orderNumber: 0,
+    orderDate: 0,
+    newOrderNumber: 0
   }),
   methods: {
     fetchCart() {
@@ -56,9 +65,47 @@ export default {
     },
     removeProduct(productName){
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
+    },
+    addOrdersAndShowAlert() {
+      axios
+          .post(`${this.ordersApi}/add-from-cart`) // Move items to settled orders
+          .then(() => {
+            // Fetch last settled orders
+            axios
+                .get(`${this.ordersApi}/last-settled-order`)
+                .then(response => {
+                  const lastOrders = response.data;
+                  if (lastOrders && lastOrders.length > 0) {
+                    let orderDetails = "Kinnitatud tellimus:\n\n";
+                    lastOrders.forEach(order => {
+                      orderDetails += `Tellimuse number: ${order.newOrderNumber}\n`;
+                      orderDetails += `Kuupäev: ${new Date(order.orderDate).toLocaleString()}\n`;
+                      orderDetails += `Toode: ${order.productName}\n`;
+                      orderDetails += `Kogus: ${order.quantity}\n`;
+                      orderDetails += `Hind: €${order.price.toFixed(2)}\n\n`;
+                    });
+                    alert(orderDetails); // Show alert with order details
+                  } else {
+                    alert("No settled orders found.");
+                  }
+                  this.deleteCart(); // Clear the cart after processing orders
+                })
+                .catch(err => {
+                  console.error("Error fetching last settled orders:", err);
+                  alert("Kinnitatud tellimuste laadimine ebaõnnestus.");
+                });
+          })
+          .catch(err => {
+            console.error("Error adding orders from cart:", err);
+            alert("Tellimuste kinnitamine ebaõnnestus.");
+          });
+    },
+    deleteCart() {
+      axios
+          .delete(`${this.ordersApi}/delete-from-cart`)
+          .then(this.fetchCart)
+          .catch(err => console.error("Error clearing cart:", err));
     }
-
-
   },
   mounted() {
     this.fetchCart()

@@ -16,8 +16,8 @@
         <th class="text-center">Perekonnanimi</th>
         <th class="text-center">Tootenimi</th>
         <th class="text-center">Tellimuse kuupäev</th>
-        <th class="text-center">hind</th>
-        <th class="text-center">kogus</th>
+        <th class="text-center">Kogus</th>
+        <th class="text-center">Hind</th>
       </tr>
       </thead>
 

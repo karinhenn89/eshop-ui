@@ -42,8 +42,6 @@
 </template>
 
 
-
-
 <script>
 import axios from "axios";
 
@@ -110,8 +108,7 @@ export default {
   },
 
 
-mounted()
-{
+mounted() {
   console.log(this.isAdmin)
   this.fetchProducts()
 }
@@ -161,4 +158,3 @@ mounted()
   }
 }
 </style>
-

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1> Kinnitatud tellimused </h1>
-</div>
+  </div>
 
 
 
@@ -51,7 +51,9 @@ import axios from "axios";
 export default {
   data: () => ({
     settledApi: "http://localhost:8090/api/settled-orders",
+    api: "http://localhost:8090/api/eshop",
     settledOrders: [],
+    usernameC: ""
 
   }),
 
@@ -78,8 +80,24 @@ export default {
 
 
   methods: {
+
+    // getUserInfo(){
+    //
+    //   axios.get(`${this.api}/oneuser`, usernameC)
+    //         .then(res=> this.firstNameC=res.firstName)
+    //         .then(res=> this.lastNameC=res.lastName)
+    //         .then(res=> this.emailC=res.email)
+    //
+    // },
     fetchSettledOrders(){
       axios.get(`${this.settledApi}/all-settled-orders`).then(res => this.settledOrders=res.data)
+      let usernameC =this.settledOrders.username;
+      console.log(usernameC)
+      // axios.get(`${this.api}/oneuser`, { params: { username: usernameC } })
+      //     .then(res=> this.firstNameC=res.firstName)
+      //     .then(res=> this.lastNameC=res.lastName)
+      //     .then(res=> this.emailC=res.email)
+      // console.log(this.firstNameC)
     },
     formatDate(dateString) {
       if (!dateString) return "Unknown Date"; // Fallback for empty dates
@@ -121,4 +139,4 @@ export default {
 </style>
 <script setup lang=" ts
     ">
-    </script>
+</script>

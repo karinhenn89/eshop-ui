@@ -78,6 +78,7 @@ export default {
 
           // location.reload();
           this.$router.push({ name: 'Home2' });
+          window.location.reload();
 
 
         } else {

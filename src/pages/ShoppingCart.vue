@@ -1,6 +1,7 @@
 <template>
   <MainNavbar />
   <ShoppingCartTable />
+  <FooterCompo/>
 
 
 </template>
@@ -10,6 +11,7 @@
 
 import MainNavbar from "@/components/MainNavbar.vue";
 import ShoppingCartTable from "@/components/ShoppingCartTable.vue";
+import FooterCompo from "@/components/FooterCompo.vue";
 
 
 
@@ -18,6 +20,7 @@ export default {
 
 
   components: {
+    FooterCompo,
 
 
     MainNavbar,

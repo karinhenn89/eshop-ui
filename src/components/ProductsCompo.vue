@@ -1,59 +1,47 @@
 <template>
   <div class="container">
-    <div class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Shop</div>
-  </div>
+    <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Shop</h1>
 
+    <!-- Shop Items -->
+    <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-2 align-items-center">
+      <!-- Product Image on the Left or Right based on index -->
+      <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-2'">
+        <img :src="item.image" alt="Product Image" class="img-fluid img-thumbnail" />
+      </div>
 
-  <div>
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Foto pakett</th>
-        <th class="text-center">Kirjeldus</th>
-        <th class="text-center">Hind</th>
-        <th class="text-center"></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr v-for="item in storeProducts" :key="item.productName">
-        <td>{{ item.productName }}</td>
-        <td class="text-center">{{ item.description }}</td>
-        <td class="text-center">${{ item.price }}</td>
-        <td class="text-center">
+      <!-- Product Info on the Right or Left -->
+      <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-1'">
+        <h3>{{ item.productName }}</h3>
+        <h4>${{ item.price }}</h4>
+        <p>{{ item.description }}</p>
+        <div class="text-center">
           <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
-          <button v-if="!isAdmin" @click="addToCart(item)" class="btn btn-sm">Lisa ostukorvi</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+          <button v-if="!isAdmin" @click="addToCart(item)" class="btn btn-primary btn-sm">Lisa ostukorvi</button>
+        </div>
+      </div>
+    </div>
 
-    <div v-if="isAdmin"  class="input-group">
+    <!-- Add Product Section (Admin only) -->
+    <div v-if="isAdmin" class="add-product-form mt-5 mb-5">
       <form @submit.prevent="addProduct">
-        <div class="row text-center">
-          <input v-model="newProduct.productName" placeholder="Toote nimi" class=" form-control col" required/>
-          <input v-model="newProduct.price" placeholder="Hind" class=" form-control col" required/>
-          <div class="input-group">
-            <span class="input-group-text">Toote kirjeldus</span>
-            <textarea v-model="newProduct.description" class="form-control" aria-label="With textarea"></textarea>
-
-            <div class="input-group">
-              <span class="input-group-text">Toote pilt</span>
-              <input type="file" @change="handleFileChange" class="form-control" />
+        <div class="row text-center justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <input v-model="newProduct.productName" placeholder="Toote nimi" class="form-control mb-3" required />
+            <input v-model="newProduct.price" placeholder="Hind" class="form-control mb-3" required />
+            <input v-model="newProduct.image" placeholder="Foto" class="form-control mb-3" />
+            <div class="input-group mb-3">
+              <span class="input-group-text">Toote kirjeldus</span>
+              <textarea v-model="newProduct.description" class="form-control" aria-label="With textarea"></textarea>
             </div>
-
+            <button @click="addProduct" class="btn btn-secondary btn-sm mt-3">Add new</button>
           </div>
-          <button @click="addProduct()" class="btn btn-secondary btn-sm">Add new</button>
         </div>
       </form>
     </div>
-
-
-    <br><br><br>
-
-
   </div>
 </template>
+
+
 
 
 <script>
@@ -132,6 +120,45 @@ mounted()
 </script>
 
 
-<style>
+<style scoped>
+/* General Product Card Styling */
+.img-thumbnail {
+  max-height: 300px;
+  object-fit: cover;
+}
 
+/* Add Product Form Styling */
+.add-product-form {
+  margin-top: 50px; /* More space at the top */
+  margin-bottom: 50px; /* More space at the bottom */
+}
+
+/* Center the form */
+.add-product-form form .row {
+  display: flex;
+  justify-content: center;
+}
+
+.add-product-form form .col-12 {
+  width: 100%;
+}
+
+.add-product-form form .col-md-8,
+.add-product-form form .col-lg-6 {
+  max-width: 500px; /* Limit the width for large screens */
+}
+
+/* Styling for the "Add new" button */
+.add-product-form button {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Mobile and tablet responsiveness */
+@media (max-width: 768px) {
+  .add-product-form form .col-12 {
+    width: 100%;
+  }
+}
 </style>
+

@@ -25,10 +25,6 @@
             <li v-if="loggedIn && isAdmin" class="nav-item">
               <router-link to="/allorders" class="nav-link fs-3 border-start ">Tellimused</router-link>  </li>
 
-<!--            <li v-if="loggedIn" class="nav-item">-->
-<!--              <router-link to="/adminproducts" class="nav-link fs-3 border-start">Admin-Products</router-link>-->
-<!--            </li>-->
-
           </ul>
         </div>
 

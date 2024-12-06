@@ -86,8 +86,12 @@ export default {
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
     },
     addOrdersAndShowAlert() {
+      this.getUserInfo()
+      const payload = {
+        username: this.username || localStorage.getItem('username'), // Use the current or stored username
+      };
       axios
-          .post(`${this.ordersApi}/add-from-cart`) // Move items to settled orders
+          .post(`${this.ordersApi}/add-from-cart`, payload) // Move items to settled orders
           .then(() => {
             // Fetch last settled orders
             axios
@@ -104,7 +108,7 @@ export default {
                       orderDetails += `Hind: €${order.price.toFixed(2)}\n\n`;
                     });
                     alert(orderDetails); // Show alert with order details
-                    this.getUserInfo()
+
                   } else {
                     alert("No settled orders found.");
                   }

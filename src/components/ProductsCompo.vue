@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Shop</div>
+    <div class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</div>
   </div>
 
 
@@ -19,7 +19,7 @@
       <tr v-for="item in storeProducts" :key="item.productName">
         <td>{{ item.productName }}</td>
         <td class="text-center">{{ item.description }}</td>
-        <td class="text-center">${{ item.price }}</td>
+        <td class="text-center">€{{ item.price }}</td>
         <td class="text-center">
           <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
           <button v-if="!isAdmin" @click="addToCart(item)" class="btn btn-sm">Lisa ostukorvi</button>
@@ -122,8 +122,7 @@ export default {
   },
 
 
-mounted()
-{
+mounted() {
   console.log(this.isAdmin)
   this.fetchProducts()
 }

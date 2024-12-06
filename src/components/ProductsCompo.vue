@@ -68,7 +68,6 @@ export default {
     userRightsId: localStorage.getItem('userRightsId') || null,
     storeProducts: [],
     image: null,
-
   }),
   methods: {
 
@@ -89,7 +88,6 @@ export default {
     addProduct() {
       axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchProducts);
       this.newProduct = {productName: "", description: "", price: "", image:""};
-
     },
 
     updateProduct(productName) {
@@ -101,6 +99,8 @@ export default {
         productName: item.productName,
         price: item.price,
         quantity: 1 // Default to adding 1 quantity to the cart
+
+
       };
 
       axios
@@ -111,6 +111,8 @@ export default {
           .catch((err) => {
             console.error("Error adding to cart:", err);
           });
+      // Then trigger a full page reload
+      window.location.reload();
     }
   },
   computed: {

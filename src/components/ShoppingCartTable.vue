@@ -79,11 +79,18 @@ export default {
       axios.all([
         axios.get(`${this.api}/shoppingcart`).then(res => (this.storeCart = res.data)),
         axios.get(`${this.api}/calculate-cart-total`).then(res => (this.cartTotal = res.data)),
-        axios.get(`${this.api}/cart-items-count`).then(res => (this.cartItemsCount = res.data))
-      ])
+
+        axios.get(`${this.api}/cart-items-count`).then(res => {
+          this.cartItemsCount = res.data;
+          localStorage.setItem("cartItemsCount", res.data);
+          console.log(this.cartItemsCount);
+        }),
+      ]);
+
     },
     removeProduct(productName){
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
+      location.reload();
     },
     addOrdersAndShowAlert() {
       this.getUserInfo()
@@ -108,11 +115,10 @@ export default {
                       orderDetails += `Hind: €${order.price.toFixed(2)}\n\n`;
                     });
                     alert(orderDetails); // Show alert with order details
-
                   } else {
                     alert("No settled orders found.");
                   }
-                  this.deleteCart();// Clear the cart after processing orders
+                  this.deleteCart(); // Clear the cart after processing orders
                 })
                 .catch(err => {
                   console.error("Error fetching last settled orders:", err);
@@ -153,10 +159,7 @@ export default {
   },
   mounted() {
     this.fetchCart()
-
-
-
-  }
+  },
 }
 
 </script>

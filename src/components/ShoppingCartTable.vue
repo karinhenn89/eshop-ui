@@ -33,6 +33,18 @@
     </button>
   </div>
 
+  <div v-if="!isUser" class="input-group mb-3">
+    <form action="">
+      <label for="firstName">Eesnimi</label>
+      <input type="text" id="firstName" v-model="firstName">
+      <label for="lastName">Perekonnanimi</label>
+      <input type="text" id="lastName" v-model="lastName">
+      <label for="email">E-mail</label>
+      <input type="text" id="email" v-model="email">
+
+    </form>
+  </div>
+
 
   <br><br><br><br><br><br><br><br>
 </template>
@@ -53,7 +65,14 @@ export default {
     cartItemsCount: 0,
     orderNumber: 0,
     orderDate: 0,
-    newOrderNumber: 0
+    newOrderNumber: 0,
+    username:null,
+    firstName: "",
+    email: "",
+    lastName:"",
+    userRightsId: localStorage.getItem('userRightsId') || null,
+
+
   }),
   methods: {
     fetchCart() {
@@ -85,10 +104,11 @@ export default {
                       orderDetails += `Hind: €${order.price.toFixed(2)}\n\n`;
                     });
                     alert(orderDetails); // Show alert with order details
+                    this.getUserInfo()
                   } else {
                     alert("No settled orders found.");
                   }
-                  this.deleteCart(); // Clear the cart after processing orders
+                  this.deleteCart();// Clear the cart after processing orders
                 })
                 .catch(err => {
                   console.error("Error fetching last settled orders:", err);
@@ -105,13 +125,34 @@ export default {
           .delete(`${this.ordersApi}/delete-from-cart`)
           .then(this.fetchCart)
           .catch(err => console.error("Error clearing cart:", err));
-    }
+    },
 
+    getUserInfo() {
+      if (localStorage.getItem('loggedIn') !== null) {
+        this.firstName = localStorage.getItem('firstName')
+        this.lastName = localStorage.getItem('lastName')
+        this.email = localStorage.getItem('email')
+        this.username = localStorage.getItem('username')
 
+      } else {
+        console.log("The user is not logged in.");
+      }
+      console.log( this.firstName + " " + this.lastName + " " + this.email + this.username)
+    },
+
+  },
+
+  computed: {
+    isUser() {
+      return this.userRightsId === '2';
+    },
   },
   mounted() {
     this.fetchCart()
-  },
+
+
+
+  }
 }
 
 </script>

@@ -2,6 +2,7 @@
   <MainNavbar />
   <ShoppingCartTable />
 
+
 </template>
 
 
@@ -11,10 +12,13 @@ import MainNavbar from "@/components/MainNavbar.vue";
 import ShoppingCartTable from "@/components/ShoppingCartTable.vue";
 
 
+
 export default {
   name: "ShoppingCart",
 
+
   components: {
+
 
     MainNavbar,
     ShoppingCartTable

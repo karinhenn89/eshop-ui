@@ -1,9 +1,10 @@
 <template>
 
-  <div class="container">
-
-
-    <p class="mx-3">
+  <div class="container mt-5">
+<div class="row mx-2">
+<div class="col-6">
+    <p class="mx-3 mb-5">
+      <br><br><br>
       <br>
       Kaku Foto OÜ (Reg. kood 14364059)
       <br>
@@ -23,7 +24,12 @@
     </svg>
       +372 56486385
     </p>
+</div>
+  <div class="col-6 mb-5">
 
+    <img class="img-fluid img-thumbnail" src="../assets/20230805-_DSC0405.jpg" alt="">
+  </div>
+</div>
   </div>
 
 

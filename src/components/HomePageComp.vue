@@ -4,8 +4,8 @@
   <div class="container">
     <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Lähme, püüame hetki...</h1>
     <div class="row mx-2">
-      <div class="col-6">
-        <p class="lh-lg fw-lighter">
+      <div class="col-5">
+        <p class="lh-lg fw-lighter text-start">
           Tere tulemast, armas inimene, minu kodulehele! Olen Tallinnas resideeruv pulmafotograaf ja
           portreefotograaf. Ilmselt jõudsid minu kodulehe, sest otsid omale fotograafi. Vaata julgelt ringi
           ning "Kontakt" lehekülje alt saad mulle otse kirjutada või "Tutvustus ja tagasiside" lehel
@@ -21,6 +21,7 @@
           Aga veelkord, vaata julgelt mu kodulehel ringi ning ootan Su imelisi pildisoove oma postkasti! :)
         </p>
       </div>
+      <div class="col-1"></div>
       <div class="col-3">
         <img src="../assets/20230326-_DSC1747-Edit-2.jpg" class="img-thumbnail" alt="">
         <img src="../assets/20230326-_DSC1624-Edit-2.jpg" class="img-thumbnail" alt="">

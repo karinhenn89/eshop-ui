@@ -1,13 +1,13 @@
 <template>
   <div v-if="userRightsId ==='1'">
   <div class="container">
-    <h1> Kinnitatud tellimused </h1>
+    <h1 class = "mt-5"> Kinnitatud tellimused </h1>
   </div>
 
 
-
+<div class="container">
   <div>
-    <table class="table">
+    <table class="table  mt-5">
       <thead>
       <tr>
         <th>Tellimuse nr.</th>
@@ -39,7 +39,7 @@
       </tbody>
     </table>
   </div>
-
+</div>
   </div>
 
 </template>

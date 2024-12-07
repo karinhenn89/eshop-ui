@@ -1,11 +1,12 @@
 <template>
-  <div v-if="userRightsId ==='1'" >
+<div class="container ">
+  <div v-if="userRightsId ==='1'"  >
     <div>
-      <h1>Kasutajate nimekiri</h1>
+      <h1 class="pt-5 ">Kasutajate nimekiri</h1>
     </div>
     <div>
-      <table class="table">
-        <thead>
+      <table class="table mt-5">
+        <thead >
         <tr>
           <th>Eesnimi</th>
           <th>Perekonnanimi</th>
@@ -25,6 +26,7 @@
       </table>
     </div>
   </div>
+</div>
 </template>
 
 <script>

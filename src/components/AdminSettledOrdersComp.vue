@@ -26,9 +26,9 @@
         <td>{{ item.newOrderNumber }}</td>
 
         <td>{{item.username}}</td>
-        <td>{{    }}</td>
-        <td>{{    }}</td>
-        <td>{{    }}</td>
+        <td>{{item.firstName}}</td>
+        <td>{{item.lastName}}</td>
+        <td>{{item.email}}</td>
         <td>{{ item.productName }}</td>
         <td class="text-center">{{ formatDate(item.orderDate) }}</td>
         <td class="text-center">{{ item.quantity }}</td>
@@ -53,67 +53,50 @@ export default {
     settledApi: "http://localhost:8090/api/settled-orders",
     api: "http://localhost:8090/api/eshop",
     settledOrders: [],
-    usernameC: ""
-
   }),
-
-  computed: {
-    groupedOrders() {
-      const grouped = this.settledOrders.reduce((acc, order) => {
-        if (!acc[order.newOrderNumber]) {
-          acc[order.newOrderNumber] = {
-            newOrderNumber: order.newOrderNumber,
-            orderDate: order.orderDate,
-            products: [],
-          };
-        }
-        acc[order.newOrderNumber].products.push({
-          productName: order.productName,
-          price: order.price,
-          quantity: order.quantity,
-        });
-        return acc;
-      }, {});
-      return Object.values(grouped); // Convert object to array for rendering
-    },
-  },
-
 
   methods: {
 
-    // getUserInfo(){
-    //
-    //   axios.get(`${this.api}/oneuser`, usernameC)
-    //         .then(res=> this.firstNameC=res.firstName)
-    //         .then(res=> this.lastNameC=res.lastName)
-    //         .then(res=> this.emailC=res.email)
-    //
-    // },
-    fetchSettledOrders(){
-      axios.get(`${this.settledApi}/all-settled-orders`).then(res => this.settledOrders=res.data)
-      let usernameC =this.settledOrders.username;
-      console.log(usernameC)
-      // axios.get(`${this.api}/oneuser`, { params: { username: usernameC } })
-      //     .then(res=> this.firstNameC=res.firstName)
-      //     .then(res=> this.lastNameC=res.lastName)
-      //     .then(res=> this.emailC=res.email)
-      // console.log(this.firstNameC)
-    },
-    formatDate(dateString) {
-      if (!dateString) return "Unknown Date"; // Fallback for empty dates
-      const date = new Date(dateString);
-      return new Intl.DateTimeFormat('en-GB', { // Use 'en-GB' for DD/MM/YYYY
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false, // Use 24-hour format. Remove this line for 12-hour format.
-      }).format(date);
+    async getUser(username) {
+      try {
+        const response = await axios.get(`${this.api}/oneuser`, { params: { username } });
+        return response.data;
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        throw error;
+      }
     },
 
-  },
+      fetchSettledOrders()
+      {
+        axios.get(`${this.settledApi}/all-settled-orders`).then(res => this.settledOrders = res.data)
+
+        // console.log(this.settledOrders)
+        // axios.get(`${this.api}/oneuser`, { params: { username: usernameC } })
+        //     .then(res=> this.firstNameC=res.firstName)
+        //     .then(res=> this.lastNameC=res.lastName)
+        //     .then(res=> this.emailC=res.email)
+
+
+      },
+
+      formatDate(dateString)
+      {
+        if (!dateString) return "Unknown Date"; // Fallback for empty dates
+        const date = new Date(dateString);
+        return new Intl.DateTimeFormat('en-GB', { // Use 'en-GB' for DD/MM/YYYY
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false, // Use 24-hour format. Remove this line for 12-hour format.
+        }).format(date);
+      }
+    ,
+
+    },
   mounted() {
     this.fetchSettledOrders();
 
@@ -128,6 +111,8 @@ export default {
       this.firstName = localStorage.getItem("firstName");
       this.lastName = localStorage.getItem("lastName");
     }
+
+
   }
 
 }

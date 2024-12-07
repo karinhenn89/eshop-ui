@@ -1,4 +1,5 @@
 <template>
+  <div v-if="userRightsId ==='1'">
   <div class="container">
     <h1> Kinnitatud tellimused </h1>
   </div>
@@ -24,11 +25,10 @@
       <tbody>
       <tr v-for="item in settledOrders" :key="item.productName">
         <td>{{ item.newOrderNumber }}</td>
-
         <td>{{item.username}}</td>
+        <td>{{item.email}}</td>
         <td>{{item.firstName}}</td>
         <td>{{item.lastName}}</td>
-        <td>{{item.email}}</td>
         <td>{{ item.productName }}</td>
         <td class="text-center">{{ formatDate(item.orderDate) }}</td>
         <td class="text-center">{{ item.quantity }}</td>
@@ -40,8 +40,8 @@
     </table>
   </div>
 
+  </div>
 
-  <br><br><br><br><br><br><br>
 </template>
 
 
@@ -51,32 +51,15 @@ import axios from "axios";
 export default {
   data: () => ({
     settledApi: "http://localhost:8090/api/settled-orders",
-    api: "http://localhost:8090/api/eshop",
+    userRightsId: localStorage.getItem('userRightsId'),
     settledOrders: [],
   }),
 
   methods: {
 
-    async getUser(username) {
-      try {
-        const response = await axios.get(`${this.api}/oneuser`, { params: { username } });
-        return response.data;
-      } catch (error) {
-        console.error('Error fetching user:', error);
-        throw error;
-      }
-    },
-
       fetchSettledOrders()
       {
         axios.get(`${this.settledApi}/all-settled-orders`).then(res => this.settledOrders = res.data)
-
-        // console.log(this.settledOrders)
-        // axios.get(`${this.api}/oneuser`, { params: { username: usernameC } })
-        //     .then(res=> this.firstNameC=res.firstName)
-        //     .then(res=> this.lastNameC=res.lastName)
-        //     .then(res=> this.emailC=res.email)
-
 
       },
 
@@ -93,8 +76,7 @@ export default {
           second: '2-digit',
           hour12: false, // Use 24-hour format. Remove this line for 12-hour format.
         }).format(date);
-      }
-    ,
+      },
 
     },
   mounted() {
@@ -112,7 +94,6 @@ export default {
       this.lastName = localStorage.getItem("lastName");
     }
 
-
   }
 
 }
@@ -122,6 +103,3 @@ export default {
 <style scoped>
 
 </style>
-<script setup lang=" ts
-    ">
-</script>

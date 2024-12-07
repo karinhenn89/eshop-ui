@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="userRightsId ==='1'" >
     <div>
       <h1>Kasutajate nimekiri</h1>
     </div>
@@ -19,6 +19,7 @@
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
           <td v-if="user.userRightsId === 1">Jah</td>
+          <td v-else>Ei</td>
         </tr>
         </tbody>
       </table>
@@ -35,7 +36,7 @@ export default {
   data: () => ({
     api: "http://localhost:8090/api/eshop",
     storeUsers: [], // Correct property name
-
+    userRightsId: localStorage.getItem('userRightsId')
   }),
 
   methods: {
@@ -50,6 +51,7 @@ export default {
 
 //     getUserStatus() {
 //       let isAdmin = false
+//       console.log (this.userRightsId)
 //       if (this.userRightsId === '1') {
 //         // eslint-disable-next-line no-unused-vars
 //         isAdmin = true
@@ -64,6 +66,8 @@ export default {
 
   mounted() {
     this.fetchAllUsers();
+    console.log(this.userRightsId)
+
   },
 };
 </script>

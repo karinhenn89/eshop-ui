@@ -15,30 +15,7 @@ export default {
   },
 
   methods: {
-    // updateUserInfo() {
-    //   if (localStorage.getItem("loggedIn") === "true") {
-    //     // Populate data when user is logged in
-    //     this.username = localStorage.getItem("username");
-    //     this.email = localStorage.getItem("email");
-    //     this.firstName = localStorage.getItem("firstName");
-    //     this.lastName = localStorage.getItem("lastName");
-    //   } else {
-    //     // Clear data when user is logged out
-    //     this.username = "";
-    //     this.email = "";
-    //     this.firstName = "";
-    //     this.lastName = "";
-    //   }
-    // },
 
-    logout() {
-      this.loggedIn = false;
-      this.username = "";
-      localStorage.removeItem('username');
-      localStorage.removeItem('email');
-      localStorage.removeItem('userRightsId')
-      alert("Logged out successfully!");
-    },
 
   },
 
@@ -68,13 +45,27 @@ export default {
 </script>
 
 <template>
-  <div>
-    <ul>
+  <div class="container mt-5" >
+    <div class="row mx-2">
+  <div class="col-6">
+    <ul class="list-unstyled lh-lg">
       <li> Username : {{ username }}</li>
       <li> First Name : {{ firstName }}</li>
       <li> Last Name : {{ lastName }}</li>
       <li> Email: {{ email }}</li>
     </ul>
+  </div>
+    <div class="col-6 register-form  mb-5">
+      <form @submit.prevent="">
+      <input type="text" id="newname" placeholder="Muuda nimi" class="form-control">
+      <input type="text" id="newlastname" placeholder="Muuda perekonnanimi" class="form-control">
+      <input type="text" id="newemail" placeholder="Muuda e-mail" class="form-control">
+      <br>
+      <button class="btn btn-primary btn-sm " type="submit">OK</button>
+      </form>
+    </div>
+
+  </div>
   </div>
 </template>
 

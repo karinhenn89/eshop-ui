@@ -2,7 +2,7 @@
 
   <div class="container mt-5">
 <div class="row mx-2">
-<div class="col-6">
+<div class="col-6 mb-5" >
     <p class="mx-3 mb-5">
       <br><br><br>
       <br>

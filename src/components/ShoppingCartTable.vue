@@ -112,7 +112,7 @@ export default {
                       orderDetails += `Kuupäev: ${new Date(order.orderDate).toLocaleString()}\n`;
                       orderDetails += `Toode: ${order.productName}\n`;
                       orderDetails += `Kogus: ${order.quantity}\n`;
-                      orderDetails += `Hind: €€{order.price.toFixed(2)}\n\n`;
+                      orderDetails += `Hind: ${order.price.toFixed(2)}€\n\n`;
                     });
                     alert(orderDetails); // Show alert with order details
                   } else {

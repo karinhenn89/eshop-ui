@@ -1,7 +1,7 @@
 
 
 <template>
-  <div class="container">
+  <div class="container custom-font">
     <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Lähme, püüame hetki...</h1>
     <div class="row mx-2">
       <div class="col-5">
@@ -23,12 +23,12 @@
       </div>
       <div class="col-1"></div>
       <div class="col-3">
-        <img src="../assets/20230326-_DSC1747-Edit-2.jpg" class="img-thumbnail" alt="">
-        <img src="../assets/20230326-_DSC1624-Edit-2.jpg" class="img-thumbnail" alt="">
+        <img src="../assets/20230326-_DSC1747-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
+        <img src="../assets/20230326-_DSC1624-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
       </div>
       <div class="col-3">
-        <img src="../assets/20230326-_DSC1655-Edit-2.jpg" class="img-thumbnail" alt="">
-        <img src="../assets/20230326-_DSC1684-Edit-2.jpg" class="img-thumbnail" alt="">
+        <img src="../assets/20230326-_DSC1655-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
+        <img src="../assets/20230326-_DSC1684-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
       </div>
     </div>
   </div>
@@ -41,5 +41,7 @@
 </script>
 
 <style scoped>
-
+.custom-font {
+  font-family: "Verdana",  serif;
+}
 </style>

@@ -81,6 +81,9 @@
 <script>
 import axios from "axios";
 
+import html2pdf from "html2pdf.js";
+
+
 export default {
   data: () => ({
     api: "http://localhost:8090/api/cart",
@@ -94,10 +97,10 @@ export default {
     orderNumber: 0,
     orderDate: 0,
     newOrderNumber: 0,
-    username:null,
+    username: null,
     firstName: "",
     email: "",
-    lastName:"",
+    lastName: "",
     userRightsId: localStorage.getItem('userRightsId') || null,
     modalContent: "",
     showOrderModal: false,
@@ -118,7 +121,7 @@ export default {
       ]);
 
     },
-    removeProduct(productName){
+    removeProduct(productName) {
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
       location.reload();
     },
@@ -167,11 +170,42 @@ export default {
       } else {
         console.log("The user is not logged in.");
       }
-      console.log( this.firstName + " " + this.lastName + " " + this.email + this.username)
+      console.log(this.firstName + " " + this.lastName + " " + this.email + this.username)
     },
     closeModal() {
       this.showOrderModal = false;
-    }
+    },
+    downloadPDF() {
+      const modalContent = document.querySelector(".modal-body");
+
+      const options = {
+        margin: 1,
+        filename: "order-details.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: {
+          unit: "cm",
+          format: "a4",
+          orientation: "portrait",
+          // We add header and footer in the `jsPDF` callbacks
+          callback: function (pdf) {
+            // Add the header
+            pdf.setFontSize(14);
+            pdf.text("Tellimuse kinnitus", pdf.settings.margin.left, 1); // Position the header
+
+            // Add the footer
+            pdf.setFontSize(10);
+            pdf.text("Ettevõtte andmed", pdf.settings.margin.left, pdf.internal.pageSize.height - 1); // Position the footer
+          },
+        },
+      };
+
+      // Generate and download the PDF with header and footer
+      html2pdf()
+          .set(options)
+          .from(modalContent)
+          .save();
+    },
   },
 
   computed: {

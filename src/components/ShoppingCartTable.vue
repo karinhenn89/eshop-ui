@@ -25,8 +25,8 @@
   </table>
 
   <div>
-    <h5 class="mt-4">Ostukorvi summa kokku: €{{cartTotal.toFixed(2) }}</h5>
-    <h5 class="mt-4">Ostukorvis on  {{cartItemsCount }} toodet</h5>
+    <h5 class="mt-4">Ostukorvi summa kokku: €{{ cartTotal.toFixed(2) }}</h5>
+    <h5 class="mt-4">Ostukorvis on {{ cartItemsCount }} toodet</h5>
     <!-- Single button to add orders from cart and show alert -->
     <button @click="addOrdersAndShowAlert" class="btn btn-outline-success">
       Kinnita tellimus ja kuva tellimus
@@ -50,24 +50,34 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Tellimuse kinnitus</h5>
+          <div>
+            <h3>Kaku Foto OÜ</h3>
+          </div>
         </div>
         <div class="modal-body">
+          <div>
+            <h5 class="modal-title">Tellimuse kinnitus</h5>
+            <br><br>
+          </div>
           <div v-for="(orderGroup, index) in groupedOrders" :key="index" class="order-group">
             <p><strong>Tellimuse number:</strong> {{ orderGroup.orderNumber }}</p>
             <p><strong>Kuupäev:</strong> {{ new Date(orderGroup.orderDate).toLocaleString() }}</p>
-            <hr />
+            <p><strong>Maksja:</strong> {{ this.firstName }} {{ this.lastName }}</p>
+            <hr/>
             <div v-for="item in orderGroup.items" :key="item.productName" class="order-item">
               <p><strong>Toode:</strong> {{ item.productName }}</p>
               <p><strong>Kogus:</strong> {{ item.quantity }}</p>
               <p><strong>Hind:</strong> €{{ item.price.toFixed(2) }}</p>
-              <hr />
+              <hr/>
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" @click="downloadPDF" id="downloadPDFButton">Lae alla PDF</button>
           <button type="button" @click="closeModal" id="closeModalButton">Sulge</button>
+        </div>
+        <div>
+
         </div>
       </div>
     </div>
@@ -174,37 +184,61 @@ export default {
     },
     closeModal() {
       this.showOrderModal = false;
+      window.location.reload();
     },
     downloadPDF() {
+
       const modalContent = document.querySelector(".modal-body");
 
       const options = {
         margin: 1,
         filename: "order-details.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
+        image: {type: "jpeg", quality: 0.98},
+        html2canvas: {scale: 2},
         jsPDF: {
           unit: "cm",
           format: "a4",
           orientation: "portrait",
-          // We add header and footer in the `jsPDF` callbacks
-          callback: function (pdf) {
-            // Add the header
-            pdf.setFontSize(14);
-            pdf.text("Tellimuse kinnitus", pdf.settings.margin.left, 1); // Position the header
-
-            // Add the footer
-            pdf.setFontSize(10);
-            pdf.text("Ettevõtte andmed", pdf.settings.margin.left, pdf.internal.pageSize.height - 1); // Position the footer
-          },
         },
       };
 
-      // Generate and download the PDF with header and footer
       html2pdf()
-          .set(options)
           .from(modalContent)
-          .save();
+          .set(options)
+          .toPdf()
+          .get('pdf')
+          .then((pdf) => {
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+        // Add a custom header
+        pdf.setFontSize(12);
+        pdf.setTextColor(40);
+        pdf.text("Kaku Foto OÜ", pageWidth - 1, 1, { align: "right" });
+
+        pdf.text("Arise tee 3-1, Kiili vald, Harjumaa", pageWidth - 1, 1.5, { align: "right" });
+        pdf.text("+372 56 486 385", pageWidth - 1, 2, { align: "right" });
+
+        pdf.setLineWidth(0.05); // Thickness of the line
+        pdf.line(1, 2.5, pageWidth - 1, 2.5); // Draw line from left to right margin
+
+
+        // Add a footer
+        const pageHeight = pdf.internal.pageSize.height;
+        pdf.setFontSize(10);
+        pdf.text(
+            "Aitäh, Sulle, tellimuse eest!",
+            pdf.internal.pageSize.getWidth() / 2,
+            pageHeight - 1,
+            {align: "center"}
+        );
+
+      /*  // Add additional design elements (lines, shapes, etc.)
+        pdf.setDrawColor(0, 0, 0);
+        pdf.line(1, 2, pdf.internal.pageSize.width - 1, 2); // Top horizontal line*/
+
+        // Save the file
+        pdf.save("order-details.pdf");
+      });
     },
   },
 
@@ -257,47 +291,62 @@ export default {
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal.show {
   display: block;
 }
+
 .modal-dialog {
   position: relative;
   margin: auto;
   top: 20%;
   max-width: 500px;
 }
+
 .modal-content {
+  text-align: left;
   background: white;
-  padding: 15px;
+  padding: 35px;
   border-radius: 5px;
 }
+
 .modal-header {
   font-weight: bold;
   border-bottom: 1px solid #ddd;
 }
+
 .modal-footer {
   text-align: right;
   padding-top: 10px;
 }
+.modal-footer2 {
+  text-align: center;
+}
 .order-details {
   margin-bottom: 10px;
 }
+
 .order-details p {
   margin: 4px 0;
 }
+
 .order-details hr {
   border: 0;
   border-top: 1px solid #ddd;
 }
+
 button {
   cursor: pointer;
 }
+
 .order-group {
   margin-bottom: 20px;
 }
+
 .order-item {
   margin-left: 20px;
 }
+
 .order-item hr {
   margin-top: 5px;
   margin-bottom: 10px;

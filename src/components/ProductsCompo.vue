@@ -12,7 +12,7 @@
       <!-- Product Info on the Right or Left -->
       <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-1'">
         <h3>{{ item.productName }}</h3>
-        <h4>${{ item.price }}</h4>
+        <h4>€{{ item.price }}</h4>
         <p>{{ item.description }}</p>
         <div class="text-center">
           <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>

@@ -41,8 +41,36 @@
       <input type="text" id="lastName" v-model="lastName">
       <label for="email">E-mail</label>
       <input type="text" id="email" v-model="email">
-
     </form>
+  </div>
+
+
+  <!-- Modal for displaying order confirmation -->
+  <div id="orderConfirmationModal" class="modal" tabindex="-1" v-bind:class="{ show: showOrderModal }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tellimuse kinnitus</h5>
+        </div>
+        <div class="modal-body">
+          <div v-for="(orderGroup, index) in groupedOrders" :key="index" class="order-group">
+            <p><strong>Tellimuse number:</strong> {{ orderGroup.orderNumber }}</p>
+            <p><strong>Kuupäev:</strong> {{ new Date(orderGroup.orderDate).toLocaleString() }}</p>
+            <hr />
+            <div v-for="item in orderGroup.items" :key="item.productName" class="order-item">
+              <p><strong>Toode:</strong> {{ item.productName }}</p>
+              <p><strong>Kogus:</strong> {{ item.quantity }}</p>
+              <p><strong>Hind:</strong> €{{ item.price.toFixed(2) }}</p>
+              <hr />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" @click="downloadPDF" id="downloadPDFButton">Lae alla PDF</button>
+          <button type="button" @click="closeModal" id="closeModalButton">Sulge</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -52,6 +80,9 @@
 
 <script>
 import axios from "axios";
+
+import html2pdf from "html2pdf.js";
+
 
 export default {
   data: () => ({
@@ -66,12 +97,14 @@ export default {
     orderNumber: 0,
     orderDate: 0,
     newOrderNumber: 0,
-    username:null,
+    username: null,
     firstName: "",
     email: "",
-    lastName:"",
+    lastName: "",
     userRightsId: localStorage.getItem('userRightsId') || null,
-
+    modalContent: "",
+    showOrderModal: false,
+    parsedOrders: []
 
   }),
   methods: {
@@ -88,7 +121,7 @@ export default {
       ]);
 
     },
-    removeProduct(productName){
+    removeProduct(productName) {
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
       location.reload();
     },
@@ -105,27 +138,17 @@ export default {
                 .get(`${this.ordersApi}/last-settled-order`)
                 .then(response => {
                   const lastOrders = response.data;
-                  if (lastOrders && lastOrders.length > 0) {
-                    let orderDetails = "Kinnitatud tellimus:\n\n";
-                    lastOrders.forEach(order => {
-                      orderDetails += `Tellimuse number: ${order.newOrderNumber}\n`;
-                      orderDetails += `Kuupäev: ${new Date(order.orderDate).toLocaleString()}\n`;
-                      orderDetails += `Toode: ${order.productName}\n`;
-                      orderDetails += `Kogus: ${order.quantity}\n`;
-                      orderDetails += `Hind: ${order.price.toFixed(2)}€\n\n`;
-                    });
-                    alert(orderDetails); // Show alert with order details
-                  } else {
-                    alert("No settled orders found.");
-                  }
-                  this.deleteCart(); // Clear the cart after processing orders
+                  this.parsedOrders = lastOrders.length ? lastOrders : [];
+                  this.showOrderModal = true;
+                  this.deleteCart();
                 })
-                .catch(err => {
+                .catch((err) => {
                   console.error("Error fetching last settled orders:", err);
-                  alert("Kinnitatud tellimuste laadimine ebaõnnestus.");
+                  this.parsedOrders = [];
+                  this.showOrderModal = true;
                 });
           })
-          .catch(err => {
+          .catch((err) => {
             console.error("Error adding orders from cart:", err);
             alert("Tellimuste kinnitamine ebaõnnestus.");
           });
@@ -147,14 +170,71 @@ export default {
       } else {
         console.log("The user is not logged in.");
       }
-      console.log( this.firstName + " " + this.lastName + " " + this.email + this.username)
+      console.log(this.firstName + " " + this.lastName + " " + this.email + this.username)
     },
+    closeModal() {
+      this.showOrderModal = false;
+    },
+    downloadPDF() {
+      const modalContent = document.querySelector(".modal-body");
 
+      const options = {
+        margin: 1,
+        filename: "order-details.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: {
+          unit: "cm",
+          format: "a4",
+          orientation: "portrait",
+          // We add header and footer in the `jsPDF` callbacks
+          callback: function (pdf) {
+            // Add the header
+            pdf.setFontSize(14);
+            pdf.text("Tellimuse kinnitus", pdf.settings.margin.left, 1); // Position the header
+
+            // Add the footer
+            pdf.setFontSize(10);
+            pdf.text("Ettevõtte andmed", pdf.settings.margin.left, pdf.internal.pageSize.height - 1); // Position the footer
+          },
+        },
+      };
+
+      // Generate and download the PDF with header and footer
+      html2pdf()
+          .set(options)
+          .from(modalContent)
+          .save();
+    },
   },
 
   computed: {
     isUser() {
       return this.userRightsId === '2';
+    },
+    groupedOrders() {
+      const grouped = [];
+      this.parsedOrders.forEach((order) => {
+        let existingGroup = grouped.find(
+            (group) =>
+                group.orderNumber === order.newOrderNumber &&
+                group.orderDate === order.orderDate
+        );
+        if (!existingGroup) {
+          existingGroup = {
+            orderNumber: order.newOrderNumber,
+            orderDate: order.orderDate,
+            items: [],
+          };
+          grouped.push(existingGroup);
+        }
+        existingGroup.items.push({
+          productName: order.productName,
+          quantity: order.quantity,
+          price: order.price,
+        });
+      });
+      return grouped;
     },
   },
   mounted() {
@@ -165,5 +245,62 @@ export default {
 </script>
 
 <style>
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal.show {
+  display: block;
+}
+.modal-dialog {
+  position: relative;
+  margin: auto;
+  top: 20%;
+  max-width: 500px;
+}
+.modal-content {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+.modal-header {
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+.modal-footer {
+  text-align: right;
+  padding-top: 10px;
+}
+.order-details {
+  margin-bottom: 10px;
+}
+.order-details p {
+  margin: 4px 0;
+}
+.order-details hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+button {
+  cursor: pointer;
+}
+.order-group {
+  margin-bottom: 20px;
+}
+.order-item {
+  margin-left: 20px;
+}
+.order-item hr {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 
 </style>

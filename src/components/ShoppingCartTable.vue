@@ -53,18 +53,25 @@
           <h5 class="modal-title">Tellimuse kinnitus</h5>
         </div>
         <div class="modal-body">
-
-          <p id="modalBodyText">{{ modalContent }}</p>
+          <div v-for="(orderGroup, index) in groupedOrders" :key="index" class="order-group">
+            <p><strong>Tellimuse number:</strong> {{ orderGroup.orderNumber }}</p>
+            <p><strong>Kuupäev:</strong> {{ new Date(orderGroup.orderDate).toLocaleString() }}</p>
+            <hr />
+            <div v-for="item in orderGroup.items" :key="item.productName" class="order-item">
+              <p><strong>Toode:</strong> {{ item.productName }}</p>
+              <p><strong>Kogus:</strong> {{ item.quantity }}</p>
+              <p><strong>Hind:</strong> €{{ item.price.toFixed(2) }}</p>
+              <hr />
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
+          <button type="button" @click="downloadPDF" id="downloadPDFButton">Lae alla PDF</button>
           <button type="button" @click="closeModal" id="closeModalButton">Sulge</button>
         </div>
       </div>
     </div>
   </div>
-
-
-
 
 
   <br><br><br><br><br><br><br><br>
@@ -93,7 +100,8 @@ export default {
     lastName:"",
     userRightsId: localStorage.getItem('userRightsId') || null,
     modalContent: "",
-    showOrderModal: false
+    showOrderModal: false,
+    parsedOrders: []
 
   }),
   methods: {
@@ -127,32 +135,17 @@ export default {
                 .get(`${this.ordersApi}/last-settled-order`)
                 .then(response => {
                   const lastOrders = response.data;
-                  if (lastOrders && lastOrders.length > 0) {
-
-                    let orderDetails = "Kinnitatud tellimus:\n\n";
-                    lastOrders.forEach(order => {
-                      orderDetails += `Tellimuse number: ${order.newOrderNumber}\n`;
-                      orderDetails += `Kuupäev: ${new Date(order.orderDate).toLocaleString()}\n`;
-                      orderDetails += `Toode: ${order.productName}\n`;
-                      orderDetails += `Kogus: ${order.quantity}\n`;
-                      orderDetails += `Hind: ${order.price.toFixed(2)}€\n\n`;
-                    });
-
-                    this.modalContent = orderDetails;
-                    this.showOrderModal = true;
-                  } else {
-                    this.modalContent = "No settled orders found.";
-                    this.showOrderModal = true;
-                  }
-                  this.deleteCart(); // Clear the cart after processing orders
+                  this.parsedOrders = lastOrders.length ? lastOrders : [];
+                  this.showOrderModal = true;
+                  this.deleteCart();
                 })
-                .catch(err => {
+                .catch((err) => {
                   console.error("Error fetching last settled orders:", err);
-                  this.modalContent = "Kinnitatud tellimuste laadimine ebaõnnestus.";
+                  this.parsedOrders = [];
                   this.showOrderModal = true;
                 });
           })
-          .catch(err => {
+          .catch((err) => {
             console.error("Error adding orders from cart:", err);
             alert("Tellimuste kinnitamine ebaõnnestus.");
           });
@@ -184,6 +177,30 @@ export default {
   computed: {
     isUser() {
       return this.userRightsId === '2';
+    },
+    groupedOrders() {
+      const grouped = [];
+      this.parsedOrders.forEach((order) => {
+        let existingGroup = grouped.find(
+            (group) =>
+                group.orderNumber === order.newOrderNumber &&
+                group.orderDate === order.orderDate
+        );
+        if (!existingGroup) {
+          existingGroup = {
+            orderNumber: order.newOrderNumber,
+            orderDate: order.orderDate,
+            items: [],
+          };
+          grouped.push(existingGroup);
+        }
+        existingGroup.items.push({
+          productName: order.productName,
+          quantity: order.quantity,
+          price: order.price,
+        });
+      });
+      return grouped;
     },
   },
   mounted() {
@@ -228,8 +245,28 @@ export default {
   text-align: right;
   padding-top: 10px;
 }
+.order-details {
+  margin-bottom: 10px;
+}
+.order-details p {
+  margin: 4px 0;
+}
+.order-details hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+}
 button {
   cursor: pointer;
+}
+.order-group {
+  margin-bottom: 20px;
+}
+.order-item {
+  margin-left: 20px;
+}
+.order-item hr {
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 </style>

@@ -41,9 +41,30 @@
       <input type="text" id="lastName" v-model="lastName">
       <label for="email">E-mail</label>
       <input type="text" id="email" v-model="email">
-
     </form>
   </div>
+
+
+  <!-- Modal for displaying order confirmation -->
+  <div id="orderConfirmationModal" class="modal" tabindex="-1" v-bind:class="{ show: showOrderModal }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tellimuse kinnitus</h5>
+        </div>
+        <div class="modal-body">
+
+          <p id="modalBodyText">{{ modalContent }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" @click="closeModal" id="closeModalButton">Sulge</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 
 
   <br><br><br><br><br><br><br><br>
@@ -71,7 +92,8 @@ export default {
     email: "",
     lastName:"",
     userRightsId: localStorage.getItem('userRightsId') || null,
-
+    modalContent: "",
+    showOrderModal: false
 
   }),
   methods: {
@@ -106,6 +128,7 @@ export default {
                 .then(response => {
                   const lastOrders = response.data;
                   if (lastOrders && lastOrders.length > 0) {
+
                     let orderDetails = "Kinnitatud tellimus:\n\n";
                     lastOrders.forEach(order => {
                       orderDetails += `Tellimuse number: ${order.newOrderNumber}\n`;
@@ -114,15 +137,19 @@ export default {
                       orderDetails += `Kogus: ${order.quantity}\n`;
                       orderDetails += `Hind: ${order.price.toFixed(2)}€\n\n`;
                     });
-                    alert(orderDetails); // Show alert with order details
+
+                    this.modalContent = orderDetails;
+                    this.showOrderModal = true;
                   } else {
-                    alert("No settled orders found.");
+                    this.modalContent = "No settled orders found.";
+                    this.showOrderModal = true;
                   }
                   this.deleteCart(); // Clear the cart after processing orders
                 })
                 .catch(err => {
                   console.error("Error fetching last settled orders:", err);
-                  alert("Kinnitatud tellimuste laadimine ebaõnnestus.");
+                  this.modalContent = "Kinnitatud tellimuste laadimine ebaõnnestus.";
+                  this.showOrderModal = true;
                 });
           })
           .catch(err => {
@@ -149,7 +176,9 @@ export default {
       }
       console.log( this.firstName + " " + this.lastName + " " + this.email + this.username)
     },
-
+    closeModal() {
+      this.showOrderModal = false;
+    }
   },
 
   computed: {
@@ -165,5 +194,42 @@ export default {
 </script>
 
 <style>
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal.show {
+  display: block;
+}
+.modal-dialog {
+  position: relative;
+  margin: auto;
+  top: 20%;
+  max-width: 500px;
+}
+.modal-content {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+.modal-header {
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+.modal-footer {
+  text-align: right;
+  padding-top: 10px;
+}
+button {
+  cursor: pointer;
+}
 
 </style>

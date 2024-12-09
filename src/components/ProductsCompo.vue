@@ -92,7 +92,7 @@ export default {
       axios
           .post(`${this.cartApi}/add-to-cart`, productToCart)
           .then(() => {
-            alert(`${item.productName} has been added to the cart!`);
+            // alert(`${item.productName} has been added to the cart!`);
           })
           .catch((err) => {
             console.error("Error adding to cart:", err);

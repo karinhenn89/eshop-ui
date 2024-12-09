@@ -44,7 +44,7 @@
               </span>
             </div>
 
-            <button type="submit" class="btn btn-outline-secondary btn-sm text-nowrap gap-2" :disabled="!passwordsMatch">
+            <button type="submit"  class="btn btn-outline-secondary btn-sm text-nowrap gap-2" :disabled="!passwordsMatch">
               Registreeri
             </button>
           </div>
@@ -80,6 +80,7 @@ export default {
   },
 
   methods: {
+
     async addNewUser() {
       try {
         if (!this.passwordsMatch) {
@@ -89,6 +90,7 @@ export default {
         await axios.post(`${this.api}/addnewuser`, this.newUser);
         alert("Kasutaja on edukalt registreeritud!");
         this.resetForm();
+        this.$router.push({ name: 'Home2' });
       } catch (error) {
         console.error("Error while adding user:", error);
         alert("Kasutaja registreerimine ebaõnnestus.");

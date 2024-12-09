@@ -1,19 +1,19 @@
 <template>
-  <footer class="bg-light text-dark py-4 mt-auto">
-    <div class="container">
+  <footer class="bg-light text-dark py-4 mt-auto ">
+    <div class="container ">
       <div class="row justify-content-between align-items-center">
         <!-- Quick Links -->
-        <div class="col-md-6 mb-3 d-flex justify-content-start">
+        <div class="col-md-6 mb-3 d-flex justify-content-start px-5">
 
           <nav>
-            <router-link to="/" class="text-decoration-none text-dark mx-2">Kodu</router-link>
-            <router-link to="/shop" class="text-decoration-none text-dark mx-2">Pood</router-link>
-            <router-link to="/contact" class="text-decoration-none text-dark mx-2">Kontakt</router-link>
+            <router-link to="/" class="text-decoration-none text-dark mx-5">Kodu</router-link>
+            <router-link to="/shop" class="text-decoration-none text-dark mx-5">Pood</router-link>
+            <router-link to="/contact" class="text-decoration-none text-dark mx-5">Kontakt</router-link>
           </nav>
         </div>
 
         <!-- Contact Info -->
-        <div class="col-md-6 mb-3 text-end">
+        <div class="col-md-6 mb-3 text-end px-5">
 
           <p class="mb-1">
             <i class="bi bi-envelope"></i> info@epood.ee
@@ -25,17 +25,17 @@
             <i class="bi bi-geo-alt"></i> Tallinn, Eesti
           </p>
           <!-- Social Media Links -->
-          <div class="d-flex justify-content-end gap-3">
-            <a href="#" class="text-dark">
-              <i class="bi bi-facebook fs-4"></i>
-            </a>
-            <a href="#" class="text-dark">
-              <i class="bi bi-instagram fs-4"></i>
-            </a>
-            <a href="#" class="text-dark">
-              <i class="bi bi-twitter fs-4"></i>
-            </a>
-          </div>
+<!--          <div class="d-flex justify-content-end gap-3">-->
+<!--            <a href="#" class="text-dark">-->
+<!--              <i class="bi bi-facebook fs-4"></i>-->
+<!--            </a>-->
+<!--            <a href="#" class="text-dark">-->
+<!--              <i class="bi bi-instagram fs-4"></i>-->
+<!--            </a>-->
+<!--            <a href="#" class="text-dark">-->
+<!--              <i class="bi bi-twitter fs-4"></i>-->
+<!--            </a>-->
+<!--          </div>-->
         </div>
       </div>
     </div>

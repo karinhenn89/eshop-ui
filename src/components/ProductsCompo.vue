@@ -16,7 +16,7 @@
         <p>{{ item.description }}</p>
         <div class="text-center">
           <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
-          <button v-if="!isAdmin" @click="addToCart(item)" class="btn btn-primary btn-sm">Lisa ostukorvi</button>
+          <button v-if="!isAdmin" @click="addToCart(item)" class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Lisa ostukorvi</button>
         </div>
       </div>
     </div>

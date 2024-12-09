@@ -44,7 +44,7 @@
               </span>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-sm mt-3" :disabled="!passwordsMatch">
+            <button type="submit" class="btn btn-outline-secondary btn-sm text-nowrap gap-2" :disabled="!passwordsMatch">
               Registreeri
             </button>
           </div>

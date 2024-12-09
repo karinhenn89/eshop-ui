@@ -1,4 +1,9 @@
 body {
-    background: #f8f8f1;
+    background: #f8f5f1;
     font-family: "Verdana",  serif;
+}
+
+button {
+    background-color: #e7e7e7;
+    color: black;
 }

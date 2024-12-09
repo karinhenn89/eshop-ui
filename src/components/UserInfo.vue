@@ -4,6 +4,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      isFormVisible: false,
       username: "",
       firstName: "",
       lastName: "",
@@ -18,6 +19,10 @@ export default {
   },
 
   methods: {
+    toggleForm() {
+      this.isFormVisible = !this.isFormVisible; // Toggle form visibility
+    },
+
     async changeUser() {
       try {
         const response = await axios.put(
@@ -40,6 +45,7 @@ export default {
   },
 
   mounted() {
+
     // Check localStorage for stored login state and username
     if (localStorage.getItem("loggedIn")) {
       this.username = localStorage.getItem("username");
@@ -73,8 +79,12 @@ export default {
           <li>Email: {{ email }}</li>
         </ul>
       </div>
+
+
+
       <div class="col-6 register-form mb-5">
-        <form @submit.prevent="changeUser">
+        <button  class="btn btn-outline-secondary btn-sm text-nowrap gap-2" @click="toggleForm">Muuda andmeid</button>
+        <form v-if="isFormVisible"  @submit.prevent="changeUser">
           <input
               v-model="newInfo.firstName"
               type="text"
@@ -93,7 +103,7 @@ export default {
               placeholder="Update Email"
               class="form-control"
           />
-          <br />
+
           <button class="btn btn-outline-secondary btn-sm text-nowrap gap-2" type="submit">OK</button>
         </form>
       </div>

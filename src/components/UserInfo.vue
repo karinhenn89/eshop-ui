@@ -78,12 +78,13 @@ export default {
           <li>Last Name: {{ lastName }}</li>
           <li>Email: {{ email }}</li>
         </ul>
+        <button  class="btn btn-outline-secondary btn-sm text-nowrap gap-2" @click="toggleForm">Muuda andmeid</button>
       </div>
 
 
 
       <div class="col-6 register-form mb-5">
-        <button  class="btn btn-outline-secondary btn-sm text-nowrap gap-2" @click="toggleForm">Muuda andmeid</button>
+
         <form v-if="isFormVisible"  @submit.prevent="changeUser">
           <input
               v-model="newInfo.firstName"

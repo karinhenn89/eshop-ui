@@ -74,6 +74,7 @@ export default {
           localStorage.setItem('lastName', response.data.lastName); // Persist username
           localStorage.setItem('email', response.data.email); // Persist username
           localStorage.setItem('userRightsId', response.data.userRightsId); // Persist username
+          localStorage.setItem('id', response.data.id);
           this.$emit('login-success', this.username);// Emit the username to parent component
 
           // location.reload();

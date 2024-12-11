@@ -1,9 +1,8 @@
 <template>
-  <div id="navbar" class="container">
+  <div id="navbar" class="container-fluid">
     <div  >
-      <img class="img-fluid" src="../assets/20221222-_DSC81782-Edit.jpg" alt="Responsive Image">
+      <img class="img-fluid my-2 rounded" src="../assets/20221222-_DSC81782-Edit.jpg" alt="Responsive Image">
       <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 navbar-custom ">
-        <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -148,6 +147,10 @@ export default {
 .navbar-custom {
   background-color: #d1c7bd !important;
 
+}
+
+input {
+  background-color: #42b983;
 }
 
 </style>

@@ -1,6 +1,6 @@
 
 body {
-    background: #f8f5f1;
+    background: #F1ede6;
     font-family: "Assistant",  serif;
 }
 
@@ -14,7 +14,7 @@ table {
 /* Styles for the custom table */
 .rounded-shadow-table {
     border-collapse: collapse;
-    background-color: #f5f5dc; /* Light beige */
+    background-color: #ebe3db; /* Light beige */
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
     overflow: hidden; /* Ensures the border-radius applies fully */
@@ -31,7 +31,7 @@ table {
 
 /* Add subtle styling for the header */
 .rounded-shadow-table th {
-    background-color: #ece3cd; /* Slightly darker beige for the header */
+    background-color: #d1c7bd; /* Slightly darker beige for the header */
     font-weight: bold;
 }
 

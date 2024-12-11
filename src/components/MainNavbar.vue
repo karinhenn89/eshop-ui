@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <div>
+  <div id="navbar" class="container">
+    <div  >
       <img class="img-fluid" src="../assets/20221222-_DSC81782-Edit.jpg" alt="Responsive Image">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 navbar-custom ">
         <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,6 +137,17 @@ export default {
 .flex-container img {
   max-width: 100%;
   height: auto;
+}
+#navbar{
+  border-collapse: collapse;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+  background-color: #d1c7bd;
+  color: #cccccc;
+}
+.navbar-custom {
+  background-color: #d1c7bd !important;
+
 }
 
 </style>

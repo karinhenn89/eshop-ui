@@ -10,19 +10,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <router-link to="/" class="nav-link fs-3 border-end">Kodu</router-link>
+              <router-link to="/" class="nav-link fs-3 border-secondary border-end">Kodu</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/shop" class="nav-link fs-3 border-end">Pood</router-link>
+              <router-link to="/shop" class="nav-link fs-3 border-secondary border-end">Pood</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/contact" class="nav-link fs-3 ">Kontakt</router-link>
             </li>
             <li v-if="loggedIn && isAdmin" class="nav-item">
-              <router-link to="/allusers" class="nav-link fs-3 border-start ">Kliendid</router-link>
+              <router-link to="/allusers" class="nav-link fs-3 border-secondary border-start ">Kliendid</router-link>
             </li>
             <li v-if="loggedIn && isAdmin" class="nav-item">
-              <router-link to="/allorders" class="nav-link fs-3 border-start ">Tellimused</router-link>  </li>
+              <router-link to="/allorders" class="nav-link fs-3 border-secondary border-start ">Tellimused</router-link>  </li>
 
           </ul>
         </div>

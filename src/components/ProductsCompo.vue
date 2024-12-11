@@ -2,36 +2,51 @@
   <div class="container">
     <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</h1>
 
-    <!-- Shop Items -->
-    <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-5 py-3 align-items-center">
-      <!-- Product Image on the Left or Right based on index -->
-      <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-2'">
-        <img :src="item.image" alt="Product Image" class="img-fluid img-thumbnail" />
-      </div>
-
-      <!-- Product Info on the Right or Left -->
-      <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-1' ">
-        <h3>{{ item.productName }}</h3>
-        <h4>€{{ item.price }}</h4>
-        <p>{{ item.description }}</p>
-        <div class="text-center">
-          <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
-          <button v-if="!isAdmin && userRightsId !== null" @click="addToCart(item)" class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Lisa ostukorvi</button>
-          <div class="border-top mt-4 pt-4" v-if="userRightsId === null">
-           Logi sisse või
-            <router-link class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to="/addnewuser">registreeri kasutajaks</router-link> , et osta</div>
+    <div>
+      <!-- Shop Items -->
+      <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-4 py-2 align-items-center">
+        <!-- Product Image on the Left or Right based on index -->
+        <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-2'">
+          <img :src="item.image" alt="Product Image" class="img-fluid img-thumbnail" style="height: 350px; width: auto"/>
         </div>
+
+        <!-- Product Info on the Right or Left -->
+
+        <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-1' ">
+
+          <div class="product-details">
+          <h3>{{ item.productName }}</h3>
+          <h4>€{{ item.price }}</h4>
+          <p>{{ item.description }}</p>
+          <div class="text-center">
+            <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta
+              toode
+            </button>
+            <button v-if="!isAdmin && userRightsId !== null" @click="addToCart(item)"
+                    class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Lisa ostukorvi
+            </button>
+            <div class="border-top mt-4 pt-4" v-if="userRightsId === null">
+              Logi sisse või
+              <router-link class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                           to="/addnewuser">registreeri kasutajaks
+              </router-link>
+              , et osta
+            </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
-
     <!-- Add Product Section (Admin only) -->
     <div v-if="isAdmin" class="add-product-form mt-5 mb-5">
       <form @submit.prevent="addProduct">
         <div class="row text-center justify-content-center">
           <div class="col-12 col-md-8 col-lg-6">
-            <input v-model="newProduct.productName" placeholder="Toote nimi" class="form-control mb-3" required />
-            <input v-model="newProduct.price" placeholder="Hind" class="form-control mb-3" required />
-            <input v-model="newProduct.image" placeholder="Foto" class="form-control mb-3" />
+            <input v-model="newProduct.productName" placeholder="Toote nimi" class="form-control mb-3" required/>
+            <input v-model="newProduct.price" placeholder="Hind" class="form-control mb-3" required/>
+            <input v-model="newProduct.image" placeholder="Foto" class="form-control mb-3"/>
             <div class="input-group mb-3">
               <span class="input-group-text">Toote kirjeldus</span>
               <textarea v-model="newProduct.description" class="form-control" aria-label="With textarea"></textarea>
@@ -76,7 +91,7 @@ export default {
     },
     addProduct() {
       axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchProducts);
-      this.newProduct = {productName: "", description: "", price: "", image:""};
+      this.newProduct = {productName: "", description: "", price: "", image: ""};
     },
 
     updateProduct(productName) {
@@ -111,10 +126,10 @@ export default {
   },
 
 
-mounted() {
-  console.log(this.isAdmin)
-  this.fetchProducts()
-}
+  mounted() {
+    console.log(this.isAdmin)
+    this.fetchProducts()
+  }
 }
 
 </script>
@@ -123,7 +138,7 @@ mounted() {
 <style scoped>
 /* General Product Card Styling */
 .img-thumbnail {
-  max-height: 300px;
+  max-height: 400px;
   object-fit: cover;
 }
 
@@ -153,11 +168,19 @@ mounted() {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
 }
+.img-thumbnail {
+  margin-bottom: 0;
+}
+
 
 /* Mobile and tablet responsiveness */
 @media (max-width: 768px) {
   .add-product-form form .col-12 {
     width: 100%;
+  }
+  .row.align-items-center > div {
+    padding-left: 1px;
+    padding-right: 1px;
   }
 }
 </style>

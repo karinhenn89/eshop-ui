@@ -39,7 +39,23 @@ table {
 .rounded-shadow-table tbody tr:hover {
     background-color: #f0eada; /* Slightly lighter beige on hover */
 }
+.product-details {
+    border: 2px solid #d1c7bd; /* Light gray border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 16px; /* Add some spacing inside the container */
+    /*background-color: #fdfdfd;*/ /* Optional: Light background for better contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
 
+    width: 500px; /* Fixed width for portrait shape */
+    height: 350px; /* Fixed height for portrait shape */
+
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Space between content blocks */
+    align-items: center; /* Center-align content horizontally */
+
+    margin: auto; /* Center the container in its parent */
+}
 
 button {
     background-color: #e7e7e7;

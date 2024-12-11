@@ -3,7 +3,7 @@
 <div v-if="this.userRightsId !== '1'" class="container">
   <h3>Tellimused</h3>
 <div>
-  <table class="table">
+  <table class="rounded-shadow-table">
     <thead>
     <tr>
       <th>Tellimuse nr.</th>
@@ -98,5 +98,7 @@ export default {
 
 
 <style scoped>
-
+.rounded-shadow-table{
+  width: 70%;
+}
 </style>

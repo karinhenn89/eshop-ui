@@ -303,7 +303,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .rounded-shadow-table {
   width: 50%;
 }

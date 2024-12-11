@@ -1,7 +1,19 @@
 
 body {
     background: #F1ede6;
+    /*background-image: url(https://images.pixieset.com/79201758/c5fb6d0cbeae9899bcfabd4dc736881d-medium.jpg);*/
+    /*background-size: cover; !* Ensure the image covers the entire element *!*/
+    /*background-position: center; !* Center the image *!*/
+    /*!*opacity: 0.3; !* 10% opacity *!*!*/
+    /*height: 100vh; !* Full viewport height *!*/
+    /*width: 100%; !* Full width *!*/
+    /*position: relative; !* Position relative for child elements *!*/
+    /*z-index: -1; !* Ensure it sits behind other content *!*/
     font-family: "Assistant",  serif;
+}
+
+.background-image{
+
 }
 
 table {
@@ -40,10 +52,10 @@ table {
     background-color: #f0eada; /* Slightly lighter beige on hover */
 }
 .product-details {
-    border: 2px solid #d1c7bd; /* Light gray border */
+    border: 4px double #d1c7bd;
     border-radius: 15px; /* Rounded corners */
     padding: 16px; /* Add some spacing inside the container */
-    /*background-color: #fdfdfd;*/ /* Optional: Light background for better contrast */
+    background-color: #f1eee8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
 
     width: 500px; /* Fixed width for portrait shape */
@@ -62,5 +74,5 @@ button {
     color: black;
 }
  .container{
-     max-width: 2300px;
+     max-width: 1700px;
  }

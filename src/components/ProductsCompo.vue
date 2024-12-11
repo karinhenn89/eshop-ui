@@ -2,12 +2,12 @@
   <div class="container">
     <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</h1>
 
-    <div>
+    <div class="container" style="max-width: 1250px">
       <!-- Shop Items -->
-      <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-4 py-2 align-items-center">
+      <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-1 py-5 align-items-end">
         <!-- Product Image on the Left or Right based on index -->
         <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-2'">
-          <img :src="item.image" alt="Product Image" class="img-fluid img-thumbnail" style="height: 350px; width: auto"/>
+          <img :src="item.image" alt="Product Image" class="img-fluid " />
         </div>
 
         <!-- Product Info on the Right or Left -->
@@ -169,6 +169,15 @@ mounted() {
 }
 .img-thumbnail {
   margin-bottom: 0;
+}
+
+.img-fluid {
+  height: 350px;
+  width: auto;
+  border: 4px double #d1c7bd;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  //border-style: double;
 }
 
 

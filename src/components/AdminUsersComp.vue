@@ -10,6 +10,7 @@
         <tr>
           <th>Eesnimi</th>
           <th>Perekonnanimi</th>
+          <th>Kasutajanimi</th>
           <th>Email</th>
           <th>Admin</th>
         </tr>
@@ -18,6 +19,7 @@
         <tr v-for="user in storeUsers" :key="user.email">
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
+          <td>{{user.username}}</td>
           <td>{{ user.email }}</td>
           <td v-if="user.userRightsId === 1">Jah</td>
           <td v-else>Ei</td>

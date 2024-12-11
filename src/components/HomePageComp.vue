@@ -24,10 +24,12 @@
       <div class="col-1"></div>
       <div class="col-3">
         <img src="../assets/20230326-_DSC1747-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
+        <img src="../assets/20211104-_DSC0366-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
         <img src="../assets/20230326-_DSC1624-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
       </div>
       <div class="col-3">
         <img src="../assets/20230326-_DSC1655-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
+        <img src="../assets/20230805-_DSC9409.jpg" class="img-thumbnail mb-3"  alt="">
         <img src="../assets/20230326-_DSC1684-Edit-2.jpg" class="img-thumbnail mb-3" alt="">
       </div>
     </div>
@@ -44,4 +46,5 @@
 .custom-font {
   font-family: "Verdana",  serif;
 }
+
 </style>

@@ -12,7 +12,8 @@
           type="text"
           placeholder="Username"
           class="form-control form-control-sm "
-          style="width: 100px;"
+          style="width: 100px; background-color:#F1ede6 "
+
       />
       <input
           v-model="password"
@@ -20,7 +21,7 @@
           type="password"
           placeholder="Password"
           class="form-control form-control-sm m-lg-2"
-          style="width: 100px;"
+          style="width: 100px; background-color:#F1ede6 "
       />
       <button
           class="btn btn-outline-secondary btn-sm text-nowrap"

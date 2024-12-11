@@ -362,7 +362,7 @@ export default {
 }
 
 .custom-button {
-  background-color: #f5f5dc; /* Beige color */
+  background-color: #d1c7bd ;
   border: 1px solid #dcd2a2; /* Slightly darker beige for border */
   color: #6b6b47; /* Muted dark color for text */
   font-size: 12px; /* Smaller font size */

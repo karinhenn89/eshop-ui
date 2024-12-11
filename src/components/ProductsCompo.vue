@@ -19,7 +19,7 @@
           <h4>€{{ item.price }}</h4>
           <p>{{ item.description }}</p>
           <div class="text-center">
-            <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta
+            <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger border-0 btn-sm" style ="background-color: #a38181;">Kustuta
               toode
             </button>
             <button v-if="!isAdmin && userRightsId !== null" @click="addToCart(item)"
@@ -35,18 +35,17 @@
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
+
     <!-- Add Product Section (Admin only) -->
     <div v-if="isAdmin" class="add-product-form mt-5 mb-5">
       <form @submit.prevent="addProduct">
         <div class="row text-center justify-content-center">
           <div class="col-12 col-md-8 col-lg-6">
-            <input v-model="newProduct.productName" placeholder="Toote nimi" class="form-control mb-3" required/>
-            <input v-model="newProduct.price" placeholder="Hind" class="form-control mb-3" required/>
-            <input v-model="newProduct.image" placeholder="Foto" class="form-control mb-3"/>
+            <input v-model="newProduct.productName" placeholder="Toote nimi" class="form-control mb-3" required />
+            <input v-model="newProduct.price" placeholder="Hind" class="form-control mb-3" required />
+            <input v-model="newProduct.image" placeholder="Foto" class="form-control mb-3" />
             <div class="input-group mb-3">
               <span class="input-group-text">Toote kirjeldus</span>
               <textarea v-model="newProduct.description" class="form-control" aria-label="With textarea"></textarea>
@@ -91,7 +90,7 @@ export default {
     },
     addProduct() {
       axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchProducts);
-      this.newProduct = {productName: "", description: "", price: "", image: ""};
+      this.newProduct = {productName: "", description: "", price: "", image:""};
     },
 
     updateProduct(productName) {
@@ -126,10 +125,10 @@ export default {
   },
 
 
-  mounted() {
-    console.log(this.isAdmin)
-    this.fetchProducts()
-  }
+mounted() {
+  console.log(this.isAdmin)
+  this.fetchProducts()
+}
 }
 
 </script>

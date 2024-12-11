@@ -1,9 +1,8 @@
 <template>
-  <div id="navbar" class="container">
+  <div id="navbar" class="container-fluid">
     <div  >
-      <img class="img-fluid" src="../assets/20221222-_DSC81782-Edit.jpg" alt="Responsive Image">
+      <img class="img-fluid my-2 rounded" src="../assets/20221222-_DSC81782-Edit.jpg" alt="Responsive Image">
       <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 navbar-custom ">
-        <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -11,19 +10,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <router-link to="/" class="nav-link fs-3 border-end">Kodu</router-link>
+              <router-link to="/" class="nav-link fs-3 border-secondary border-end">Kodu</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/shop" class="nav-link fs-3 border-end">Pood</router-link>
+              <router-link to="/shop" class="nav-link fs-3 border-secondary border-end">Pood</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/contact" class="nav-link fs-3 ">Kontakt</router-link>
             </li>
             <li v-if="loggedIn && isAdmin" class="nav-item">
-              <router-link to="/allusers" class="nav-link fs-3 border-start ">Kliendid</router-link>
+              <router-link to="/allusers" class="nav-link fs-3 border-secondary border-start ">Kliendid</router-link>
             </li>
             <li v-if="loggedIn && isAdmin" class="nav-item">
-              <router-link to="/allorders" class="nav-link fs-3 border-start ">Tellimused</router-link>  </li>
+              <router-link to="/allorders" class="nav-link fs-3 border-secondary border-start ">Tellimused</router-link>  </li>
 
           </ul>
         </div>
@@ -148,6 +147,10 @@ export default {
 .navbar-custom {
   background-color: #d1c7bd !important;
 
+}
+
+input {
+  background-color: #42b983;
 }
 
 </style>

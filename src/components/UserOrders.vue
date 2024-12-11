@@ -1,6 +1,6 @@
 
 <template>
-<div class="container">
+<div v-if="this.userRightsId !== '1'" class="container">
   <h3>Tellimused</h3>
 <div>
   <table class="table">

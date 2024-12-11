@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div  class="container">
     <div class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Ostukorv</div>
   </div>
 
@@ -33,16 +33,16 @@
     </button>
   </div>
 
-  <div v-if="!isUser" class="input-group mb-3">
-    <form action="">
-      <label for="firstName">Eesnimi</label>
-      <input type="text" id="firstName" v-model="firstName">
-      <label for="lastName">Perekonnanimi</label>
-      <input type="text" id="lastName" v-model="lastName">
-      <label for="email">E-mail</label>
-      <input type="text" id="email" v-model="email">
-    </form>
-  </div>
+<!--  <div v-if="!isUser" class="input-group mb-3">-->
+<!--    <form action="">-->
+<!--      <label for="firstName">Eesnimi</label>-->
+<!--      <input type="text" id="firstName" v-model="firstName">-->
+<!--      <label for="lastName">Perekonnanimi</label>-->
+<!--      <input type="text" id="lastName" v-model="lastName">-->
+<!--      <label for="email">E-mail</label>-->
+<!--      <input type="text" id="email" v-model="email">-->
+<!--    </form>-->
+<!--  </div>-->
 
 
   <!-- Modal for displaying order confirmation -->
@@ -279,6 +279,8 @@ export default {
 </script>
 
 <style>
+
+
 
 .modal {
   display: none;

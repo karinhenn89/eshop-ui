@@ -7,18 +7,22 @@
     <thead>
     <tr>
       <th>Toode</th>
-      <th class="text-center">Kogus</th>
       <th class="text-center">Hind</th>
+      <th class="text-center">Kogus</th>
       <th class="text-center"></th>
     </tr>
     </thead>
     <tbody>
     <tr v-for="item in storeCart" :key="item.productName">
       <td>{{ item.productName }}</td>
-      <td class="text-center">{{ item.quantity }}</td>
       <td class="text-center">€{{ item.price }}</td>
+
       <td class="text-center">
-        <button @click="removeProduct(item.productName)">Kustuta ostukorvist</button>
+        <b-button-group size="sm" class="d-inline-flex align-items-center">
+          <b-button class="custom-button" @click="decreaseQuantity(item.productName)">-</b-button>
+          <span class="mx-2">{{ item.quantity }}</span>
+          <b-button class="custom-button" @click="increaseQuantity(item)">+</b-button>
+        </b-button-group>
       </td>
     </tr>
     </tbody>
@@ -98,7 +102,9 @@ export default {
   data: () => ({
     api: "http://localhost:8090/api/cart",
     ordersApi: "http://localhost:8090/api/settled-orders",
+    adminApi: "http://localhost:8090/api/admin",
     newProduct: {productName: "", price: 0, quantity: 0},
+    newProduct2: {productName: "", description: "", price: 0},
     storeCart: [],
     quantity: 0,
     price: 0,
@@ -169,6 +175,28 @@ export default {
           .then(this.fetchCart)
           .catch(err => console.error("Error clearing cart:", err));
     },
+    increaseQuantity(item) {
+      const productToCart = {
+            productName: item.productName,
+            price: item.price,
+            quantity: 1 // Default to adding 1 quantity to the cart
+    };
+      axios
+          .post(`${this.api}/add-to-cart`, productToCart)
+          .then(() => {
+            // alert(`${item.productName} has been added to the cart!`);
+          })
+          .catch((err) => {
+            console.error("Error adding to cart:", err);
+          });
+      // Then trigger a full page reload
+      window.location.reload();
+    },
+
+    decreaseQuantity(productName) {
+      axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
+      window.location.reload();
+    },
 
     getUserInfo() {
       if (localStorage.getItem('loggedIn') !== null) {
@@ -210,38 +238,33 @@ export default {
           .then((pdf) => {
 
             const pageWidth = pdf.internal.pageSize.getWidth();
-        // Add a custom header
-        pdf.setFontSize(12);
-        pdf.setTextColor(40);
-        pdf.text("Kaku Foto OÜ", pageWidth - 1, 1, { align: "right" });
+            // Add a custom header
+            pdf.setFontSize(12);
+            pdf.setTextColor(40);
+            pdf.text("Kaku Foto OÜ", pageWidth - 1, 1, {align: "right"});
 
-        pdf.text("Arise tee 3-1, Kiili vald, Harjumaa", pageWidth - 1, 1.5, { align: "right" });
-        pdf.text("+372 56 486 385", pageWidth - 1, 2, { align: "right" });
+            pdf.text("Arise tee 3-1, Kiili vald, Harjumaa", pageWidth - 1, 1.5, {align: "right"});
+            pdf.text("+372 56 486 385", pageWidth - 1, 2, {align: "right"});
 
-        pdf.setLineWidth(0.05); // Thickness of the line
-        pdf.line(1, 2.5, pageWidth - 1, 2.5); // Draw line from left to right margin
+            pdf.setLineWidth(0.05); // Thickness of the line
+            pdf.line(1, 2.5, pageWidth - 1, 2.5); // Draw line from left to right margin
 
 
-        // Add a footer
-        const pageHeight = pdf.internal.pageSize.height;
-        pdf.setFontSize(10);
-        pdf.text(
-            "Aitäh, Sulle, tellimuse eest!",
-            pdf.internal.pageSize.getWidth() / 2,
-            pageHeight - 1,
-            {align: "center"}
-        );
+            // Add a footer
+            const pageHeight = pdf.internal.pageSize.height;
+            pdf.setFontSize(10);
+            pdf.text(
+                "Aitäh, Sulle, tellimuse eest!",
+                pdf.internal.pageSize.getWidth() / 2,
+                pageHeight - 1,
+                {align: "center"}
+            );
 
-      /*  // Add additional design elements (lines, shapes, etc.)
-        pdf.setDrawColor(0, 0, 0);
-        pdf.line(1, 2, pdf.internal.pageSize.width - 1, 2); // Top horizontal line*/
-
-        // Save the file
-        pdf.save("order-details.pdf");
-      });
+            // Save the file
+            pdf.save("order-details.pdf");
+          });
     },
   },
-
   computed: {
     isUser() {
       return this.userRightsId === '2';
@@ -321,13 +344,6 @@ export default {
   text-align: right;
   padding-top: 10px;
 }
-.modal-footer2 {
-  text-align: center;
-}
-.order-details {
-  margin-bottom: 10px;
-}
-
 .order-details p {
   margin: 4px 0;
 }
@@ -339,6 +355,26 @@ export default {
 
 button {
   cursor: pointer;
+}
+.custom-button {
+  background-color: #f5f5dc; /* Beige color */
+  border: 1px solid #dcd2a2; /* Slightly darker beige for border */
+  color: #6b6b47; /* Muted dark color for text */
+  font-size: 12px; /* Smaller font size */
+  font-weight: bold; /* Make text bold */
+  border-radius: 4px; /* Rounded corners */
+  padding: 0.25rem 0.5rem; /* Smaller padding for compact size */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-button:hover {
+  background-color: #e6dbc9; /* Slightly darker beige on hover */
+  color: #4a4a34; /* Darker text color on hover */
+}
+
+.custom-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(221, 217, 195, 0.5); /* Focus ring for accessibility */
 }
 
 .order-group {

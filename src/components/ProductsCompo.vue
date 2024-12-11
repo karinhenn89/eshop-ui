@@ -1,22 +1,25 @@
 <template>
   <div class="container">
-    <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Shop</h1>
+    <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</h1>
 
     <!-- Shop Items -->
-    <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-2 align-items-center">
+    <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-5 py-3 align-items-center">
       <!-- Product Image on the Left or Right based on index -->
       <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-2'">
         <img :src="item.image" alt="Product Image" class="img-fluid img-thumbnail" />
       </div>
 
       <!-- Product Info on the Right or Left -->
-      <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-1'">
+      <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-1' ">
         <h3>{{ item.productName }}</h3>
         <h4>€{{ item.price }}</h4>
         <p>{{ item.description }}</p>
         <div class="text-center">
           <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger btn-sm">Kustuta toode</button>
-          <button v-if="!isAdmin" @click="addToCart(item)" class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Lisa ostukorvi</button>
+          <button v-if="!isAdmin && userRightsId !== null" @click="addToCart(item)" class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Lisa ostukorvi</button>
+          <div class="border-top mt-4 pt-4" v-if="userRightsId === null">
+           Logi sisse või
+            <router-link class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to="/addnewuser">registreeri kasutajaks</router-link> , et osta</div>
         </div>
       </div>
     </div>

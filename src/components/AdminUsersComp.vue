@@ -5,7 +5,7 @@
       <h1 class="pt-5 ">Kasutajate nimekiri</h1>
     </div>
     <div>
-      <table class="table mt-5">
+      <table class="rounded-shadow-table">
         <thead >
         <tr>
           <th>Eesnimi</th>

@@ -7,7 +7,7 @@
 
 <div class="container">
   <div>
-    <table class="table">
+    <table class="rounded-shadow-table">
       <thead>
       <tr>
         <th class="text-center">Tellimuse nr.</th>
@@ -99,5 +99,13 @@ export default {
 </script>
 
 <style scoped>
-
+.rounded-shadow-table{
+  width: 100%;
+}
+.rounded-shadow-table th,
+.rounded-shadow-table td {
+  border: none;
+  padding: 20px 20px; /* Add some padding for a clean look */
+  text-align: left; /* Align text to the left */
+}
 </style>

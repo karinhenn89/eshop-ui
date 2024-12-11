@@ -3,7 +3,7 @@
     <div class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Ostukorv</div>
   </div>
 
-  <table class="table">
+  <table class="rounded-shadow-table">
     <thead>
     <tr>
       <th>Toode</th>
@@ -301,6 +301,9 @@ export default {
 </script>
 
 <style>
+.rounded-shadow-table {
+  width: 50%;
+}
 
 .modal {
   display: none;

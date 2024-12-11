@@ -1,8 +1,45 @@
 
 body {
     background: #f8f5f1;
-    font-family: "Verdana",  serif;
+    font-family: "Assistant",  serif;
 }
+
+table {
+    font-size: 15px;
+    border-collapse: collapse;
+    margin: 16px 0;
+    border: none;
+}
+
+/* Styles for the custom table */
+.rounded-shadow-table {
+    border-collapse: collapse;
+    background-color: #f5f5dc; /* Light beige */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+    overflow: hidden; /* Ensures the border-radius applies fully */
+    margin: 30px auto; /* Center the table */
+}
+
+/* Remove borders from table cells */
+.rounded-shadow-table th,
+.rounded-shadow-table td {
+    border: none;
+    padding: 20px 40px; /* Add some padding for a clean look */
+    text-align: left; /* Align text to the left */
+}
+
+/* Add subtle styling for the header */
+.rounded-shadow-table th {
+    background-color: #ece3cd; /* Slightly darker beige for the header */
+    font-weight: bold;
+}
+
+/* Optional: Row hover effect */
+.rounded-shadow-table tbody tr:hover {
+    background-color: #f0eada; /* Slightly lighter beige on hover */
+}
+
 
 button {
     background-color: #e7e7e7;

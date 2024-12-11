@@ -77,8 +77,9 @@ export default {
           this.$emit('login-success', this.username);// Emit the username to parent component
 
           // location.reload();
-          this.$router.push({ name: 'Home2' });
           window.location.reload();
+          this.$router.push({ name: 'Home2' });
+
 
 
         } else {

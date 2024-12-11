@@ -73,6 +73,7 @@
               <p><strong>Hind:</strong> €{{ item.price.toFixed(2) }}</p>
               <hr/>
             </div>
+            <h5 class="mt-4">Ostukorvi summa kokku: €{{ this.newCartTotal }}</h5>
           </div>
         </div>
         <div class="modal-footer">
@@ -119,7 +120,8 @@ export default {
     userRightsId: localStorage.getItem('userRightsId') || null,
     modalContent: "",
     showOrderModal: false,
-    parsedOrders: []
+    parsedOrders: [],
+    newCartTotal: 0,
 
   }),
   methods: {
@@ -134,7 +136,8 @@ export default {
           console.log(this.cartItemsCount);
         }),
       ]);
-
+      this.newCartTotal= this.cartTotal;
+      console.log(this.newCartTotal)
     },
     removeProduct(productName) {
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);
@@ -324,15 +327,20 @@ export default {
 .modal-dialog {
   position: relative;
   margin: auto;
-  top: 20%;
-  max-width: 500px;
+  top: 10%; /* Adjust vertical positioning as needed */
+  max-width: 800px; /* Increase the max-width for a larger modal */
+  width: 90%; /* Optionally set a percentage width for responsiveness */
 }
 
 .modal-content {
+  position: relative; /* Change to relative for better control */
   text-align: left;
   background: white;
   padding: 35px;
   border-radius: 5px;
+  max-height: calc(100vh - 60px); /* Prevent content overflow by limiting height */
+  overflow-y: auto; /* Ensure scrollable content */
+
 }
 
 .modal-header {

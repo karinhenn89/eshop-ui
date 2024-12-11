@@ -7,10 +7,10 @@
 
 <div class="container">
   <div>
-    <table class="table  mt-5">
+    <table class="table">
       <thead>
       <tr>
-        <th>Tellimuse nr.</th>
+        <th class="text-center">Tellimuse nr.</th>
         <th class="text-center">Kasutajanimi</th>
         <th class="text-center">E-mail</th>
         <th class="text-center">Eesnimi</th>
@@ -33,8 +33,6 @@
         <td class="text-center">{{ formatDate(item.orderDate) }}</td>
         <td class="text-center">{{ item.quantity }}</td>
         <td class="text-center">€{{ item.price }}</td>
-        <td class="text-center">
-        </td>
       </tr>
       </tbody>
     </table>

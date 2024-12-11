@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Shop</h1>
+    <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</h1>
 
     <!-- Shop Items -->
     <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-2 align-items-center">

@@ -9,7 +9,6 @@
       <th>Toode</th>
       <th class="text-center">Hind</th>
       <th class="text-center">Kogus</th>
-      <th class="text-center"></th>
     </tr>
     </thead>
     <tbody>
@@ -303,8 +302,6 @@ export default {
 
 <style>
 
-
-
 .modal {
   display: none;
   position: fixed;
@@ -353,9 +350,6 @@ export default {
   border-top: 1px solid #ddd;
 }
 
-button {
-  cursor: pointer;
-}
 .custom-button {
   background-color: #f5f5dc; /* Beige color */
   border: 1px solid #dcd2a2; /* Slightly darker beige for border */

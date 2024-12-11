@@ -74,6 +74,7 @@
               <p><strong>Hind:</strong> €{{ item.price.toFixed(2) }}</p>
               <hr/>
             </div>
+            <h5 class="mt-4">Ostukorvi summa kokku: €{{ this.newCartTotal }}</h5>
           </div>
         </div>
         <div class="modal-footer">
@@ -120,7 +121,8 @@ export default {
     userRightsId: localStorage.getItem('userRightsId') || null,
     modalContent: "",
     showOrderModal: false,
-    parsedOrders: []
+    parsedOrders: [],
+    newCartTotal: 0,
 
   }),
   methods: {
@@ -135,7 +137,8 @@ export default {
           console.log(this.cartItemsCount);
         }),
       ]);
-
+      this.newCartTotal= this.cartTotal;
+      console.log(this.newCartTotal)
     },
     removeProduct(productName) {
       axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchCart);

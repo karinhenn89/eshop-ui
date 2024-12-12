@@ -16,7 +16,7 @@
           <div class="product-details">
           <h3>{{ item.productName }}</h3>
           <h4>€{{ item.price }}</h4>
-          <p>{{ item.description }}</p>
+            <p v-html="item.formattedDescription"></p>
           <div class="text-center">
             <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger border-0 btn-sm" style ="background-color: #a38181;">Kustuta
               toode
@@ -47,6 +47,7 @@
             <div class="input-group mb-3">
               <span class="input-group-text">Toote kirjeldus</span>
               <textarea v-model="newProduct.description" class="form-control" aria-label="With textarea"></textarea>
+<!--              <p v-html="formattedDescription"></p>-->
             </div>
             <button @click="addProduct" class="btn btn-secondary btn-sm mt-3">Add new</button>
           </div>
@@ -73,9 +74,13 @@ export default {
   methods: {
 
     fetchProducts() {
-      axios.all([
-        axios.get(`${this.api}/show-all-products`).then(res => (this.storeProducts = res.data))
-      ])
+      axios.get(`${this.api}/show-all-products`).then((res) => {
+        this.storeProducts = res.data.map((product) => ({
+          ...product,
+          // Replace '*' with '<br>*' to create new lines in the HTML
+          formattedDescription: product.description.replace(/\*/g, "<br>*"),
+        }));
+      });
     },
     removeProduct(productName) {
       axios.delete(`${this.api}/delete/${productName}`).then(this.fetchProducts);
@@ -111,6 +116,10 @@ export default {
     isAdmin() {
       return this.userRightsId === '1';
     },
+    formattedDescription() {
+      // Replace each '*' with '<br>*' to add new lines
+      return this.newProduct.description.replace(/\*/g, "\n*");
+    }
   },
 
 
@@ -124,10 +133,6 @@ mounted() {
 
 <style scoped>
 /* General Product Card Styling */
-.img-thumbnail {
-  max-height: 400px;
-  object-fit: cover;
-}
 
 /* Add Product Form Styling */
 .add-product-form {

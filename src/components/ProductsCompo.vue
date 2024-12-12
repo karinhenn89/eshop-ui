@@ -18,13 +18,13 @@
           <h4>€{{ item.price }}</h4>
             <p v-html="item.formattedDescription"></p>
           <div class="text-center">
-            <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger border-0 btn-sm" style ="background-color: #a38181;">Kustuta
+            <button v-if="isAdmin" @click="removeProduct(item.productName)" class="btn btn-danger border-0 btn-sm " style ="background-color: #a38181;">Kustuta
               toode
             </button>
             <button v-if="!isAdmin && userRightsId !== null" @click="addToCart(item)"
                     class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Lisa ostukorvi
             </button>
-            <div class="border-top mt-4 pt-4" v-if="userRightsId === null">
+            <div class="border-top mt-4 pt-1" v-if="userRightsId === null">
               Logi sisse või
               <router-link class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                            to="/addnewuser">registreeri kasutajaks

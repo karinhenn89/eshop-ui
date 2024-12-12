@@ -13,9 +13,9 @@
 
 
 
-      <div class="col-6 register-form mb-5">
+      <div class="col-6 register-form my-5 py-5">
 
-        <form v-if="isFormVisible"  @submit.prevent="changeUser">
+        <form v-if="isFormVisible"  @submit.prevent="changeUser" >
           <input
               v-model="newInfo.firstName"
               type="text"
@@ -35,7 +35,8 @@
               class="form-control"
           />
 
-          <button class="btn btn-outline-secondary btn-sm text-nowrap gap-2" type="submit">OK</button>
+          <button class="btn btn-outline-secondary btn-sm text-nowrap" type="submit">OK</button>
+
         </form>
       </div>
     </div>

@@ -57,7 +57,7 @@ table {
 .product-details {
     border: 4px double #d1c7bd;
     border-radius: 15px; /* Rounded corners */
-    padding: 16px; /* Add some spacing inside the container */
+    padding: 10px; /* Add some spacing inside the container */
     background-color: #f1eee8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
     background-color: rgba(241, 238, 234, 0.4);

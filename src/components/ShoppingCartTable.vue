@@ -410,7 +410,7 @@ export default {
   margin-bottom: 10px;
 }
 .modal-button {
-  background-color: #f5f5dc; /* Light beige */
+  background-color: #ebe3db; /* Light beige */
   color: #333; /* Dark text for contrast */
   border: 1px solid #ccc; /* Light gray border */
   border-radius: 8px; /* Rounded corners */

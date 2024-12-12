@@ -46,10 +46,7 @@
           <p>
             <i class="bi bi-geo-alt"></i> Tallinn, Eesti
           </p>
-
-
         </div>
-
       </div>
     </div>
   </footer>

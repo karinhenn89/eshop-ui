@@ -38,7 +38,6 @@
       </div>
     </div>
 
-    <!-- Add Product Section (Admin only) -->
     <div v-if="isAdmin" class="add-product-form mt-5 mb-5">
       <form @submit.prevent="addProduct">
         <div class="row text-center justify-content-center">
@@ -74,12 +73,6 @@ export default {
   }),
   methods: {
 
-    handleFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.image = file; // Store the file in the product object
-      }
-    },
     fetchProducts() {
       axios.all([
         axios.get(`${this.api}/show-all-products`).then(res => (this.storeProducts = res.data))
@@ -93,9 +86,6 @@ export default {
       this.newProduct = {productName: "", description: "", price: "", image:""};
     },
 
-    updateProduct(productName) {
-      axios.put(`${this.api}/update-product-details/${productName}`).then(this.fetchProducts)
-    },
 
     addToCart(item) {
       const productToCart = {
@@ -166,9 +156,6 @@ mounted() {
 .add-product-form button {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
-}
-.img-thumbnail {
-  margin-bottom: 0;
 }
 
 .img-fluid {

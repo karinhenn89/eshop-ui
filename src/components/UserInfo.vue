@@ -1,3 +1,51 @@
+<template>
+  <div class="container mt-5">
+    <div class="row mx-2">
+      <div class="col-6">
+        <ul class="list-unstyled lh-lg">
+          <li>Username: {{ username }}</li>
+          <li>First Name: {{ firstName }}</li>
+          <li>Last Name: {{ lastName }}</li>
+          <li>Email: {{ email }}</li>
+        </ul>
+        <button  class="btn btn-outline-secondary btn-sm text-nowrap gap-2" @click="toggleForm">Muuda andmeid</button>
+      </div>
+
+
+
+      <div class="col-6 register-form mb-5">
+
+        <form v-if="isFormVisible"  @submit.prevent="changeUser">
+          <input
+              v-model="newInfo.firstName"
+              type="text"
+              placeholder="Update First Name"
+              class="form-control"
+          />
+          <input
+              v-model="newInfo.lastName"
+              type="text"
+              placeholder="Update Last Name"
+              class="form-control"
+          />
+          <input
+              v-model="newInfo.email"
+              type="text"
+              placeholder="Update Email"
+              class="form-control"
+          />
+
+          <button class="btn btn-outline-secondary btn-sm text-nowrap gap-2" type="submit">OK</button>
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+
+</template>
+
+
 <script>
 import axios from "axios";
 
@@ -68,54 +116,7 @@ export default {
 };
 </script>
 
-<template>
-  <div class="container mt-5">
-    <div class="row mx-2">
-      <div class="col-6">
-        <ul class="list-unstyled lh-lg">
-          <li>Username: {{ username }}</li>
-          <li>First Name: {{ firstName }}</li>
-          <li>Last Name: {{ lastName }}</li>
-          <li>Email: {{ email }}</li>
-        </ul>
-        <button  class="btn btn-outline-secondary btn-sm text-nowrap gap-2" @click="toggleForm">Muuda andmeid</button>
-      </div>
-
-
-
-      <div class="col-6 register-form mb-5">
-
-        <form v-if="isFormVisible"  @submit.prevent="changeUser">
-          <input
-              v-model="newInfo.firstName"
-              type="text"
-              placeholder="Update First Name"
-              class="form-control"
-          />
-          <input
-              v-model="newInfo.lastName"
-              type="text"
-              placeholder="Update Last Name"
-              class="form-control"
-          />
-          <input
-              v-model="newInfo.email"
-              type="text"
-              placeholder="Update Email"
-              class="form-control"
-          />
-
-          <button class="btn btn-outline-secondary btn-sm text-nowrap gap-2" type="submit">OK</button>
-        </form>
-      </div>
-    </div>
-
-
-  </div>
-
-</template>
 
 <style>
-/* Add your styles here */
 
 </style>

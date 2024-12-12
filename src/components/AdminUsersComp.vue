@@ -52,30 +52,16 @@ export default {
         console.error("Error fetching users:", error);
       }
     },
-
-//     getUserStatus() {
-//       let isAdmin = false
-//       console.log (this.userRightsId)
-//       if (this.userRightsId === '1') {
-//         // eslint-disable-next-line no-unused-vars
-//         isAdmin = true
-//         console.log (this.userRightsId)
-//       }
-//       console.log (this.userRightsId)
-// return isAdmin
-//     }
-
-
   },
 
   mounted() {
     this.fetchAllUsers();
     console.log(this.userRightsId)
-
   },
 };
+
 </script>
 
 <style>
-/* Add any styles if necessary */
+
 </style>

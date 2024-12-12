@@ -27,21 +27,20 @@
           </ul>
         </div>
 
-        <!-- Conditionally display login form or user info -->
         <div v-if="!loggedIn">
           <LoginForm @login-success="onLoginSuccess" />
         </div>
 
         <div v-else class="d-flex align-items-center gap-2">
-          <!-- Display username -->
+
           <router-link class="btn btn-outline-secondary btn-sm text-nowrap d-inline-block" to="/usermenu" >
             <span class="fs-6">{{ username }}</span>
           </router-link>
-          <!-- Log out button -->
+
           <button @click="logout" id="logoutbutton" class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Logi välja</button>
         </div>
 
-        <!-- Adjusted Registreeri button -->
+
         <div class="d-flex align-items-center ">
           <router-link
               v-if="!loggedIn"
@@ -86,7 +85,7 @@ export default {
     fetchCartItemsCount(){
       axios.get(`${this.api}/cart-items-count`).then(res => (this.cartItemsCount = res.data));
       },
-    // This method will be triggered when the login is successful
+
     onLoginSuccess(username) {
       this.loggedIn = true;
       this.username = username; // Store the username of the logged-in user
@@ -114,7 +113,6 @@ export default {
     this.fetchCartItemsCount();
 
 
-    // Check localStorage for stored login state and username
     if (localStorage.getItem('loggedIn')) {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');

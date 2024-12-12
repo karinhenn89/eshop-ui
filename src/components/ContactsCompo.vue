@@ -53,9 +53,7 @@ export default {
 
   mounted() {
     console.log(this.isAdmin)
-
   }
-
 }
 
 </script>

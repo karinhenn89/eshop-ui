@@ -221,6 +221,7 @@ export default {
     downloadPDF() {
 
       const modalContent = document.querySelector(".modal-body");
+      const backgroundImage = require('@/assets/20230326-_DSC1564-Edit-2.jpg');
 
       const options = {
         margin: [3.5, 2, 2, 2],
@@ -242,8 +243,17 @@ export default {
           .then((pdf) => {
 
             const pageWidth = pdf.internal.pageSize.getWidth();
-            const pageHeight = pdf.internal.pageSize.height;
+            const pageHeight = pdf.internal.pageSize.getHeight();
 
+            // Save current graphics state and set opacity
+            pdf.setGState(new pdf.GState({ opacity: 0.2 })); // Set opacity (0.0 = fully transparent, 1.0 = fully opaque)
+
+
+            console.log(backgroundImage); // Check if the path is correct.
+            pdf.addImage(backgroundImage, "JPEG", 0, 0, pageWidth, pageHeight);
+
+            // Restore graphics state to remove opacity effect for further elements
+            pdf.setGState(new pdf.GState({ opacity: 1 }));
 
             // Add a custom header
             pdf.setFontSize(12);
@@ -400,7 +410,7 @@ export default {
   margin-bottom: 10px;
 }
 .modal-button {
-  background-color: #f5f5dc; /* Light beige */
+  background-color: #ebe3db; /* Light beige */
   color: #333; /* Dark text for contrast */
   border: 1px solid #ccc; /* Light gray border */
   border-radius: 8px; /* Rounded corners */

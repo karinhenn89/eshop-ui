@@ -77,8 +77,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" @click="downloadPDF" id="downloadPDFButton">Lae alla PDF</button>
-          <button type="button" @click="closeModal" id="closeModalButton">Sulge</button>
+
+          <button class="modal-button" type="button" @click="downloadPDF" id="downloadPDFButton">Lae alla PDF</button>
+          <button class="modal-button" type="button" @click="closeModal" id="closeModalButton">Sulge</button>
+
         </div>
         <div>
 
@@ -221,7 +223,7 @@ export default {
       const modalContent = document.querySelector(".modal-body");
 
       const options = {
-        margin: 1,
+        margin: [3.5, 2, 2, 2],
         filename: "order-details.pdf",
         image: {type: "jpeg", quality: 0.98},
         html2canvas: {scale: 2},
@@ -240,6 +242,9 @@ export default {
           .then((pdf) => {
 
             const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.height;
+
+
             // Add a custom header
             pdf.setFontSize(12);
             pdf.setTextColor(40);
@@ -253,7 +258,7 @@ export default {
 
 
             // Add a footer
-            const pageHeight = pdf.internal.pageSize.height;
+
             pdf.setFontSize(10);
             pdf.text(
                 "Aitäh, Sulle, tellimuse eest!",
@@ -393,6 +398,17 @@ export default {
 .order-item hr {
   margin-top: 5px;
   margin-bottom: 10px;
+}
+.modal-button {
+  background-color: #f5f5dc; /* Light beige */
+  color: #333; /* Dark text for contrast */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 20px; /* Button padding */
+  font-size: 16px; /* Text size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 </style>

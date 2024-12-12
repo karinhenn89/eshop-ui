@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</h1>
 
-    <div>
+    <div class="container" style="max-width: 1250px;">
       <!-- Shop Items -->
       <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-4 py-2 align-items-center">
         <!-- Product Image on the Left or Right based on index -->

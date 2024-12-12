@@ -3,7 +3,7 @@ body {
     background: #F1ede6;
     background:
             linear-gradient(rgba(241, 237, 230, 0.9), rgba(241, 237, 230, 0.9)),
-            url('C:/Users/orawa/Kool/eshop-ui/src/assets/20220709-_DSC1625.jpg');
+            url('../src/assets/20220709-_DSC1625.jpg');
     background-size: cover; /* Ensure the image covers the entire element */
     background-attachment: fixed;
     /*background-position-x: center;*/

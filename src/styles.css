@@ -1,20 +1,22 @@
 
 body {
     background: #F1ede6;
-    /*background-image: url(https://images.pixieset.com/79201758/c5fb6d0cbeae9899bcfabd4dc736881d-medium.jpg);*/
-    /*background-size: cover; !* Ensure the image covers the entire element *!*/
-    /*background-position: center; !* Center the image *!*/
-    /*!*opacity: 0.3; !* 10% opacity *!*!*/
-    /*height: 100vh; !* Full viewport height *!*/
-    /*width: 100%; !* Full width *!*/
-    /*position: relative; !* Position relative for child elements *!*/
-    /*z-index: -1; !* Ensure it sits behind other content *!*/
+    background:
+            linear-gradient(rgba(241, 237, 230, 0.9), rgba(241, 237, 230, 0.9)),
+            url('C:/Users/orawa/Kool/eshop-ui/src/assets/20220709-_DSC1625.jpg');
+    background-size: cover; /* Ensure the image covers the entire element */
+    background-attachment: fixed;
+    /*background-position-x: center;*/
+    /*background-position-y: -150px;*/
+
+
+    z-index: -1; /* Ensure it sits behind other content */
     font-family: "Assistant",  serif;
 
 }
 
 .background-image{
-
+ opacity: 0.9;
 }
 
 table {
@@ -58,7 +60,7 @@ table {
     padding: 16px; /* Add some spacing inside the container */
     background-color: #f1eee8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
-
+    background-color: rgba(241, 238, 234, 0.4);
     width: 500px; /* Fixed width for portrait shape */
     height: 350px; /* Fixed height for portrait shape */
 

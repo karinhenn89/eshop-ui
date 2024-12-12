@@ -26,7 +26,7 @@
 </div>
   <div class="col-6 mb-5">
 
-    <img class="img-fluid img-thumbnail" src="../assets/20230805-_DSC0405.jpg" alt="">
+    <img class="img-fluid" src="../assets/20230805-_DSC0405.jpg" alt="">
   </div>
 </div>
   </div>
@@ -57,3 +57,13 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.img-fluid {
+
+  border: 4px double #d1c7bd;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  //border-style: double;
+}
+</style>

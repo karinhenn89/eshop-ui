@@ -1,7 +1,22 @@
 
 body {
     background: #F1ede6;
+    background:
+            linear-gradient(rgba(241, 237, 230, 0.9), rgba(241, 237, 230, 0.9)),
+            url('C:/Users/orawa/Kool/eshop-ui/src/assets/20220709-_DSC1625.jpg');
+    background-size: cover; /* Ensure the image covers the entire element */
+    background-attachment: fixed;
+    /*background-position-x: center;*/
+    /*background-position-y: -150px;*/
+
+
+    z-index: -1; /* Ensure it sits behind other content */
     font-family: "Assistant",  serif;
+
+}
+
+.background-image{
+ opacity: 0.9;
 }
 
 table {
@@ -40,12 +55,12 @@ table {
     background-color: #f0eada; /* Slightly lighter beige on hover */
 }
 .product-details {
-    border: 2px solid #d1c7bd; /* Light gray border */
+    border: 4px double #d1c7bd;
     border-radius: 15px; /* Rounded corners */
     padding: 16px; /* Add some spacing inside the container */
-    /*background-color: #fdfdfd;*/ /* Optional: Light background for better contrast */
+    background-color: #f1eee8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
-
+    background-color: rgba(241, 238, 234, 0.4);
     width: 500px; /* Fixed width for portrait shape */
     height: 350px; /* Fixed height for portrait shape */
 
@@ -62,5 +77,6 @@ button {
     color: black;
 }
  .container{
-     max-width: 2300px;
+     max-width: 1700px;
+
  }

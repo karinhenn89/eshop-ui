@@ -1,11 +1,10 @@
 <template>
 
-  <div class="container mt-5">
-<div class="row mx-2">
-<div class="col-6 mb-5" >
-    <p class="mx-3 mb-5">
-      <br><br><br>
-      <br>
+  <div class="container mt-5 px-4">
+<div class="row">
+<div class="col-6 d-flex justify-content-center align-items-center px-4" style="font-size: larger">
+    <p class="">
+
       Kaku Foto OÜ (Reg. kood 14364059)
       <br>
       Arise tee 3-1
@@ -27,7 +26,7 @@
 </div>
   <div class="col-6 mb-5">
 
-    <img class="img-fluid img-thumbnail" src="../assets/20230805-_DSC0405.jpg" alt="">
+    <img class="img-fluid" src="../assets/20230805-_DSC0405.jpg" alt="">
   </div>
 </div>
   </div>
@@ -54,9 +53,17 @@ export default {
 
   mounted() {
     console.log(this.isAdmin)
-
   }
-
 }
 
 </script>
+
+<style scoped>
+.img-fluid {
+
+  border: 4px double #d1c7bd;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  //border-style: double;
+}
+</style>

@@ -1,4 +1,3 @@
-
 <template>
 <div v-if="this.userRightsId !== '1'" class="container">
   <h3>Tellimused</h3>

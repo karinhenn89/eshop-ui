@@ -1,13 +1,12 @@
 <template>
-  <div class="container">
-    <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</h1>
+  <div class="container" style="margin-top: 100px; margin-bottom: 100px">
 
-    <div class="container" style="max-width: 1250px;">
+   <div class="container" style="max-width: 1250px; margin-top: 70px">
       <!-- Shop Items -->
-      <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-4 py-2 align-items-center">
+      <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-1 py-5 align-items-end">
         <!-- Product Image on the Left or Right based on index -->
         <div :class="index % 2 === 0 ? 'col-md-6' : 'col-md-6 order-md-2'">
-          <img :src="item.image" alt="Product Image" class="img-fluid img-thumbnail" style="height: 350px; width: auto"/>
+          <img :src="item.image" alt="Product Image" class="img-fluid " />
         </div>
 
         <!-- Product Info on the Right or Left -->
@@ -38,7 +37,6 @@
       </div>
     </div>
 
-    <!-- Add Product Section (Admin only) -->
     <div v-if="isAdmin" class="add-product-form mt-5 mb-5">
       <form @submit.prevent="addProduct">
         <div class="row text-center justify-content-center">
@@ -74,28 +72,19 @@ export default {
   }),
   methods: {
 
-    handleFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.image = file; // Store the file in the product object
-      }
-    },
     fetchProducts() {
       axios.all([
         axios.get(`${this.api}/show-all-products`).then(res => (this.storeProducts = res.data))
       ])
     },
     removeProduct(productName) {
-      axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchProducts);
+      axios.delete(`${this.api}/delete/${productName}`).then(this.fetchProducts);
     },
     addProduct() {
       axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchProducts);
       this.newProduct = {productName: "", description: "", price: "", image:""};
     },
 
-    updateProduct(productName) {
-      axios.put(`${this.api}/update-product-details/${productName}`).then(this.fetchProducts)
-    },
 
     addToCart(item) {
       const productToCart = {
@@ -126,7 +115,6 @@ export default {
 
 
 mounted() {
-  console.log(this.isAdmin)
   this.fetchProducts()
 }
 }
@@ -167,8 +155,14 @@ mounted() {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
 }
-.img-thumbnail {
-  margin-bottom: 0;
+
+.img-fluid {
+  height: 350px;
+  width: auto;
+  border: 4px double #d1c7bd;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  //border-style: double;
 }
 
 

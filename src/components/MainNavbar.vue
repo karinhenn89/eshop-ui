@@ -27,22 +27,21 @@
           </ul>
         </div>
 
-        <!-- Conditionally display login form or user info -->
         <div v-if="!loggedIn">
           <LoginForm @login-success="onLoginSuccess" />
         </div>
 
         <div v-else class="d-flex align-items-center gap-2">
-          <!-- Display username -->
+
           <router-link class="btn btn-outline-secondary btn-sm text-nowrap d-inline-block" to="/usermenu" >
             <span class="fs-6">{{ username }}</span>
           </router-link>
-          <!-- Log out button -->
+
           <button @click="logout" id="logoutbutton" class="btn btn-outline-secondary btn-sm text-nowrap gap-2">Logi välja</button>
         </div>
 
-        <!-- Adjusted Registreeri button -->
-        <div class="d-flex align-items-center gap-2">
+
+        <div class="d-flex align-items-center ">
           <router-link
               v-if="!loggedIn"
               id="register"
@@ -54,7 +53,7 @@
 
               id="shoppingcart"
               to="/shoppingcart"
-              class="btn btn-outline-secondary btn-sm text-nowrap d-inline-block gap-2">
+              class="btn btn-outline-secondary btn-sm text-nowrap d-inline-block mx-2  ">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
               <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
             </svg><span class="badge text-bg-secondary">{{cartItemsCount}}</span>
@@ -86,7 +85,7 @@ export default {
     fetchCartItemsCount(){
       axios.get(`${this.api}/cart-items-count`).then(res => (this.cartItemsCount = res.data));
       },
-    // This method will be triggered when the login is successful
+
     onLoginSuccess(username) {
       this.loggedIn = true;
       this.username = username; // Store the username of the logged-in user
@@ -114,7 +113,6 @@ export default {
     this.fetchCartItemsCount();
 
 
-    // Check localStorage for stored login state and username
     if (localStorage.getItem('loggedIn')) {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');

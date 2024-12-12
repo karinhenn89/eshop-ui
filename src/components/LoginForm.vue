@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Login Form -->
     <form
         v-if="!loggedIn"
         @submit.prevent="login"
@@ -33,10 +32,6 @@
     </form>
 
 
-
-
-
-    <!-- Display Login Status -->
     <p v-if="loginError" class="text-danger">
       Invalid username or password
     </p>
@@ -63,10 +58,7 @@ export default {
           password: this.password,
         };
 
-        // Send login request to backend
         const response = await axios.post('http://localhost:8090/login', user);
-
-        // Handle response
         if (response.status === 200) {
           this.loggedIn = true;
           localStorage.setItem('loggedIn', true); // Persist login state
@@ -77,11 +69,8 @@ export default {
           localStorage.setItem('userRightsId', response.data.userRightsId); // Persist username
           this.$emit('login-success', this.username);// Emit the username to parent component
 
-          // location.reload();
           window.location.reload();
           this.$router.push({ name: 'Home2' });
-
-
 
         } else {
           this.loginError = true; // Show error if login fails

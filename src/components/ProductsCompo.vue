@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="container" style="margin-top: 100px; margin-bottom: 100px">
     <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Pood</h1>
 
-    <div class="container" style="max-width: 1250px">
+    <div class="container" style="max-width: 1250px; margin-top: 70px">
       <!-- Shop Items -->
       <div v-for="(item, index) in storeProducts" :key="item.productName" class="row mx-0 my-1 py-5 align-items-end">
         <!-- Product Image on the Left or Right based on index -->

@@ -33,7 +33,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #3a2d28;
-  //margin-top: 30px;
+
   margin-left: 30px;
   margin-right: 30px;
 

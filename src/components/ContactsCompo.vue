@@ -1,11 +1,10 @@
 <template>
 
-  <div class="container mt-5">
-<div class="row mx-2">
-<div class="col-6 mb-5" >
-    <p class="mx-3 mb-5">
-      <br><br><br>
-      <br>
+  <div class="container mt-5 px-4">
+<div class="row">
+<div class="col-6 d-flex justify-content-center align-items-center px-4" style="font-size: larger">
+    <p class="">
+
       Kaku Foto OÜ (Reg. kood 14364059)
       <br>
       Arise tee 3-1

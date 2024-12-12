@@ -1,9 +1,9 @@
 
 
 <template>
-  <div class="container custom-font">
+  <div class="container custom-font" style="margin-top: 100px; margin-bottom: 100px">
     <h1 class="pt-5 pl-4 mt-5 mb-5 display-4 mx-3">Lähme, püüame hetki...</h1>
-    <div class="row mx-2">
+    <div class="row mx-2" style="margin-top: 100px">
       <div class="col-5">
         <p class="lh-lg fw-lighter text-start">
           Tere tulemast, armas inimene, minu kodulehele! Olen Tallinnas resideeruv pulmafotograaf ja

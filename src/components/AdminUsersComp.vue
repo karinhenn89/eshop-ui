@@ -1,5 +1,5 @@
 <template>
-<div class="container ">
+<div class="container " style="margin-top: 100px; margin-bottom: 100px">
   <div v-if="userRightsId ==='1'"  >
     <div>
       <h1 class="pt-5 ">Kasutajate nimekiri</h1>

@@ -1,11 +1,11 @@
 <template>
   <div v-if="userRightsId ==='1'">
-  <div class="container">
+  <div class="container" style="margin-top: 100px; margin-bottom: 100px">
     <h1 class = "mt-5"> Kinnitatud tellimused </h1>
   </div>
 
 
-<div class="container">
+<div class="container" style="margin-bottom: 100px">
   <div>
     <table class="rounded-shadow-table">
       <thead>

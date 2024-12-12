@@ -79,7 +79,7 @@ export default {
       ])
     },
     removeProduct(productName) {
-      axios.delete(`${this.api}/remove-product/${productName}`).then(this.fetchProducts);
+      axios.delete(`${this.api}/delete/${productName}`).then(this.fetchProducts);
     },
     addProduct() {
       axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchProducts);
